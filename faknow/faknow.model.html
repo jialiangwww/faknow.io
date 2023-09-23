@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.model &mdash; FaKnow 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="faknow.model.content_based" href="faknow.model.content_based.html" />
+    <link rel="prev" title="faknow.evaluate" href="faknow.evaluate.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../run/multimodal.html">multimodal</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="faknow.config.html">faknow.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">faknow.model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.html">faknow.model.content_based</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.knowledge_aware.html">faknow.model.knowledge_aware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.layers.html">faknow.model.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html">faknow.model.social_context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-faknow.model.model">faknow.model.model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#faknow.model.model.AbstractModel"><code class="docutils literal notranslate"><span class="pre">AbstractModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.model.AbstractModel.__init__"><code class="docutils literal notranslate"><span class="pre">AbstractModel.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.model.AbstractModel.calculate_loss"><code class="docutils literal notranslate"><span class="pre">AbstractModel.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.model.AbstractModel.predict"><code class="docutils literal notranslate"><span class="pre">AbstractModel.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.model.AbstractModel.training"><code class="docutils literal notranslate"><span class="pre">AbstractModel.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">faknow.model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/faknow/faknow.model.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="faknow-model">
+<h1>faknow.model<a class="headerlink" href="#faknow-model" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faknow.model.content_based.html">faknow.model.content_based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html">faknow.model.content_based.multi_modal</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.eann">faknow.model.content_based.multi_modal.eann</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.eann.EANN"><code class="docutils literal notranslate"><span class="pre">EANN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.mcan">faknow.model.content_based.multi_modal.mcan</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN"><code class="docutils literal notranslate"><span class="pre">MCAN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.mfan">faknow.model.content_based.multi_modal.mfan</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mfan.MFAN"><code class="docutils literal notranslate"><span class="pre">MFAN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.safe">faknow.model.content_based.multi_modal.safe</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.safe.SAFE"><code class="docutils literal notranslate"><span class="pre">SAFE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.spotfake">faknow.model.content_based.multi_modal.spotfake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.spotfake.SpotFake"><code class="docutils literal notranslate"><span class="pre">SpotFake</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.html#module-faknow.model.content_based.mdfend">faknow.model.content_based.mdfend</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.mdfend.MDFEND"><code class="docutils literal notranslate"><span class="pre">MDFEND</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.mdfend.MDFEND.__init__"><code class="docutils literal notranslate"><span class="pre">MDFEND.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.mdfend.MDFEND.calculate_loss"><code class="docutils literal notranslate"><span class="pre">MDFEND.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.mdfend.MDFEND.forward"><code class="docutils literal notranslate"><span class="pre">MDFEND.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.mdfend.MDFEND.predict"><code class="docutils literal notranslate"><span class="pre">MDFEND.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.mdfend.MDFEND.training"><code class="docutils literal notranslate"><span class="pre">MDFEND.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.html#module-faknow.model.content_based.textcnn">faknow.model.content_based.textcnn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.textcnn.TextCNN"><code class="docutils literal notranslate"><span class="pre">TextCNN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.textcnn.TextCNN.__init__"><code class="docutils literal notranslate"><span class="pre">TextCNN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.textcnn.TextCNN.calculate_loss"><code class="docutils literal notranslate"><span class="pre">TextCNN.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.textcnn.TextCNN.forward"><code class="docutils literal notranslate"><span class="pre">TextCNN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.textcnn.TextCNN.predict"><code class="docutils literal notranslate"><span class="pre">TextCNN.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.html#faknow.model.content_based.textcnn.TextCNN.training"><code class="docutils literal notranslate"><span class="pre">TextCNN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.model.knowledge_aware.html">faknow.model.knowledge_aware</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.knowledge_aware.html#module-faknow.model.knowledge_aware.finerfact">faknow.model.knowledge_aware.finerfact</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact"><code class="docutils literal notranslate"><span class="pre">FinerFact</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.__init__"><code class="docutils literal notranslate"><span class="pre">FinerFact.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.att_prior_mr"><code class="docutils literal notranslate"><span class="pre">FinerFact.att_prior_mr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.calculate_loss"><code class="docutils literal notranslate"><span class="pre">FinerFact.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.channel_text"><code class="docutils literal notranslate"><span class="pre">FinerFact.channel_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.channel_user"><code class="docutils literal notranslate"><span class="pre">FinerFact.channel_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.forward"><code class="docutils literal notranslate"><span class="pre">FinerFact.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.get_intersect_matrix"><code class="docutils literal notranslate"><span class="pre">FinerFact.get_intersect_matrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.get_intersect_matrix_att"><code class="docutils literal notranslate"><span class="pre">FinerFact.get_intersect_matrix_att()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.get_user_embed"><code class="docutils literal notranslate"><span class="pre">FinerFact.get_user_embed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.predict"><code class="docutils literal notranslate"><span class="pre">FinerFact.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.predict_prior"><code class="docutils literal notranslate"><span class="pre">FinerFact.predict_prior()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.reshape_input_and_masks"><code class="docutils literal notranslate"><span class="pre">FinerFact.reshape_input_and_masks()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.self_attention"><code class="docutils literal notranslate"><span class="pre">FinerFact.self_attention()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.self_attention_user"><code class="docutils literal notranslate"><span class="pre">FinerFact.self_attention_user()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.knowledge_aware.html#faknow.model.knowledge_aware.finerfact.FinerFact.training"><code class="docutils literal notranslate"><span class="pre">FinerFact.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.model.layers.html">faknow.model.layers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.layers.html#module-faknow.model.layers.dct">faknow.model.layers.dct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctInceptionBlock"><code class="docutils literal notranslate"><span class="pre">DctInceptionBlock</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctInceptionBlock.__init__"><code class="docutils literal notranslate"><span class="pre">DctInceptionBlock.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctInceptionBlock.forward"><code class="docutils literal notranslate"><span class="pre">DctInceptionBlock.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctInceptionBlock.training"><code class="docutils literal notranslate"><span class="pre">DctInceptionBlock.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctStem"><code class="docutils literal notranslate"><span class="pre">DctStem</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctStem.__init__"><code class="docutils literal notranslate"><span class="pre">DctStem.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctStem.forward"><code class="docutils literal notranslate"><span class="pre">DctStem.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.DctStem.training"><code class="docutils literal notranslate"><span class="pre">DctStem.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.dct.conv2d_bn_relu"><code class="docutils literal notranslate"><span class="pre">conv2d_bn_relu()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.layers.html#module-faknow.model.layers.layer">faknow.model.layers.layer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.GradientReverseLayer"><code class="docutils literal notranslate"><span class="pre">GradientReverseLayer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.GradientReverseLayer.backward"><code class="docutils literal notranslate"><span class="pre">GradientReverseLayer.backward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.GradientReverseLayer.forward"><code class="docutils literal notranslate"><span class="pre">GradientReverseLayer.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedAttention"><code class="docutils literal notranslate"><span class="pre">SignedAttention</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedAttention.__init__"><code class="docutils literal notranslate"><span class="pre">SignedAttention.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedAttention.forward"><code class="docutils literal notranslate"><span class="pre">SignedAttention.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedAttention.training"><code class="docutils literal notranslate"><span class="pre">SignedAttention.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedGAT"><code class="docutils literal notranslate"><span class="pre">SignedGAT</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedGAT.__init__"><code class="docutils literal notranslate"><span class="pre">SignedGAT.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedGAT.forward"><code class="docutils literal notranslate"><span class="pre">SignedGAT.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.SignedGAT.training"><code class="docutils literal notranslate"><span class="pre">SignedGAT.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.TextCNNLayer"><code class="docutils literal notranslate"><span class="pre">TextCNNLayer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.TextCNNLayer.__init__"><code class="docutils literal notranslate"><span class="pre">TextCNNLayer.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.TextCNNLayer.forward"><code class="docutils literal notranslate"><span class="pre">TextCNNLayer.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.layer.TextCNNLayer.training"><code class="docutils literal notranslate"><span class="pre">TextCNNLayer.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.layers.html#module-faknow.model.layers.transformer">faknow.model.layers.transformer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.AddNorm"><code class="docutils literal notranslate"><span class="pre">AddNorm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.AddNorm.__init__"><code class="docutils literal notranslate"><span class="pre">AddNorm.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.AddNorm.forward"><code class="docutils literal notranslate"><span class="pre">AddNorm.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.AddNorm.training"><code class="docutils literal notranslate"><span class="pre">AddNorm.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.EncoderLayer"><code class="docutils literal notranslate"><span class="pre">EncoderLayer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.EncoderLayer.__init__"><code class="docutils literal notranslate"><span class="pre">EncoderLayer.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.EncoderLayer.forward"><code class="docutils literal notranslate"><span class="pre">EncoderLayer.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.EncoderLayer.training"><code class="docutils literal notranslate"><span class="pre">EncoderLayer.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.FFN"><code class="docutils literal notranslate"><span class="pre">FFN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.FFN.__init__"><code class="docutils literal notranslate"><span class="pre">FFN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.FFN.forward"><code class="docutils literal notranslate"><span class="pre">FFN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.FFN.training"><code class="docutils literal notranslate"><span class="pre">FFN.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.MultiHeadAttention"><code class="docutils literal notranslate"><span class="pre">MultiHeadAttention</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.MultiHeadAttention.__init__"><code class="docutils literal notranslate"><span class="pre">MultiHeadAttention.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.MultiHeadAttention.forward"><code class="docutils literal notranslate"><span class="pre">MultiHeadAttention.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.MultiHeadAttention.training"><code class="docutils literal notranslate"><span class="pre">MultiHeadAttention.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.ScaledDotProductAttention"><code class="docutils literal notranslate"><span class="pre">ScaledDotProductAttention</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.ScaledDotProductAttention.__init__"><code class="docutils literal notranslate"><span class="pre">ScaledDotProductAttention.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.ScaledDotProductAttention.forward"><code class="docutils literal notranslate"><span class="pre">ScaledDotProductAttention.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.ScaledDotProductAttention.training"><code class="docutils literal notranslate"><span class="pre">ScaledDotProductAttention.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.masked_softmax"><code class="docutils literal notranslate"><span class="pre">masked_softmax()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.sequence_mask"><code class="docutils literal notranslate"><span class="pre">sequence_mask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.transpose_output"><code class="docutils literal notranslate"><span class="pre">transpose_output()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.layers.html#faknow.model.layers.transformer.transpose_qkv"><code class="docutils literal notranslate"><span class="pre">transpose_qkv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.model.social_context.html">faknow.model.social_context</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html#module-faknow.model.social_context.base_gnn">faknow.model.social_context.base_gnn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.GAT"><code class="docutils literal notranslate"><span class="pre">GAT</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.GAT.__init__"><code class="docutils literal notranslate"><span class="pre">GAT.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.GAT.training"><code class="docutils literal notranslate"><span class="pre">GAT.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.GCN"><code class="docutils literal notranslate"><span class="pre">GCN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.GCN.__init__"><code class="docutils literal notranslate"><span class="pre">GCN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.GCN.training"><code class="docutils literal notranslate"><span class="pre">GCN.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.SAGE"><code class="docutils literal notranslate"><span class="pre">SAGE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.SAGE.__init__"><code class="docutils literal notranslate"><span class="pre">SAGE.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.base_gnn.SAGE.training"><code class="docutils literal notranslate"><span class="pre">SAGE.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html#module-faknow.model.social_context.bigcn">faknow.model.social_context.bigcn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.bigcn.BiGCN"><code class="docutils literal notranslate"><span class="pre">BiGCN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.bigcn.BiGCN.__init__"><code class="docutils literal notranslate"><span class="pre">BiGCN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.bigcn.BiGCN.calculate_loss"><code class="docutils literal notranslate"><span class="pre">BiGCN.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.bigcn.BiGCN.forward"><code class="docutils literal notranslate"><span class="pre">BiGCN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.bigcn.BiGCN.predict"><code class="docutils literal notranslate"><span class="pre">BiGCN.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.bigcn.BiGCN.training"><code class="docutils literal notranslate"><span class="pre">BiGCN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html#module-faknow.model.social_context.eddfn">faknow.model.social_context.eddfn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.eddfn.EDDFN"><code class="docutils literal notranslate"><span class="pre">EDDFN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.eddfn.EDDFN.__init__"><code class="docutils literal notranslate"><span class="pre">EDDFN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.eddfn.EDDFN.calculate_loss"><code class="docutils literal notranslate"><span class="pre">EDDFN.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.eddfn.EDDFN.forward"><code class="docutils literal notranslate"><span class="pre">EDDFN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.eddfn.EDDFN.predict"><code class="docutils literal notranslate"><span class="pre">EDDFN.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.eddfn.EDDFN.training"><code class="docutils literal notranslate"><span class="pre">EDDFN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html#module-faknow.model.social_context.gcnfn">faknow.model.social_context.gcnfn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gcnfn.GCNFN"><code class="docutils literal notranslate"><span class="pre">GCNFN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gcnfn.GCNFN.__init__"><code class="docutils literal notranslate"><span class="pre">GCNFN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gcnfn.GCNFN.training"><code class="docutils literal notranslate"><span class="pre">GCNFN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html#module-faknow.model.social_context.gnncl">faknow.model.social_context.gnncl</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gnncl.GNNCL"><code class="docutils literal notranslate"><span class="pre">GNNCL</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gnncl.GNNCL.__init__"><code class="docutils literal notranslate"><span class="pre">GNNCL.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gnncl.GNNCL.calculate_loss"><code class="docutils literal notranslate"><span class="pre">GNNCL.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gnncl.GNNCL.forward"><code class="docutils literal notranslate"><span class="pre">GNNCL.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gnncl.GNNCL.predict"><code class="docutils literal notranslate"><span class="pre">GNNCL.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.gnncl.GNNCL.training"><code class="docutils literal notranslate"><span class="pre">GNNCL.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html#module-faknow.model.social_context.nep">faknow.model.social_context.nep</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP"><code class="docutils literal notranslate"><span class="pre">NEP</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP.__init__"><code class="docutils literal notranslate"><span class="pre">NEP.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP.calculate_loss"><code class="docutils literal notranslate"><span class="pre">NEP.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP.forward"><code class="docutils literal notranslate"><span class="pre">NEP.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP.forward_attention"><code class="docutils literal notranslate"><span class="pre">NEP.forward_attention()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP.forward_gate"><code class="docutils literal notranslate"><span class="pre">NEP.forward_gate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP.predict"><code class="docutils literal notranslate"><span class="pre">NEP.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.nep.NEP.training"><code class="docutils literal notranslate"><span class="pre">NEP.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html#module-faknow.model.social_context.upfd">faknow.model.social_context.upfd</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGAT"><code class="docutils literal notranslate"><span class="pre">UPFDGAT</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGAT.__init__"><code class="docutils literal notranslate"><span class="pre">UPFDGAT.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGAT.training"><code class="docutils literal notranslate"><span class="pre">UPFDGAT.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGCN"><code class="docutils literal notranslate"><span class="pre">UPFDGCN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGCN.__init__"><code class="docutils literal notranslate"><span class="pre">UPFDGCN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGCN.training"><code class="docutils literal notranslate"><span class="pre">UPFDGCN.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGCNFN"><code class="docutils literal notranslate"><span class="pre">UPFDGCNFN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGCNFN.__init__"><code class="docutils literal notranslate"><span class="pre">UPFDGCNFN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDGCNFN.training"><code class="docutils literal notranslate"><span class="pre">UPFDGCNFN.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDSAGE"><code class="docutils literal notranslate"><span class="pre">UPFDSAGE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDSAGE.__init__"><code class="docutils literal notranslate"><span class="pre">UPFDSAGE.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.social_context.html#faknow.model.social_context.upfd.UPFDSAGE.training"><code class="docutils literal notranslate"><span class="pre">UPFDSAGE.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="module-faknow.model.model">
+<span id="faknow-model-model"></span><h2>faknow.model.model<a class="headerlink" href="#module-faknow.model.model" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.model.AbstractModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.model.</span></span><span class="sig-name descname"><span class="pre">AbstractModel</span></span><a class="reference internal" href="../_modules/faknow/model/model.html#AbstractModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.model.AbstractModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>abstract class for all models, every model should inherit it and implement the following methods:
+1. calculate_loss
+2. predict</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.model.AbstractModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/model.html#AbstractModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.model.AbstractModel.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.model.AbstractModel.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/faknow/model/model.html#AbstractModel.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.model.AbstractModel.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss or a dict of loss if there are multiple losses</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[Tensor, Dict[str, Tensor]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.model.AbstractModel.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/model.html#AbstractModel.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.model.AbstractModel.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.model.AbstractModel.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.model.AbstractModel.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-faknow.model"></span></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="faknow.evaluate.html" class="btn btn-neutral float-left" title="faknow.evaluate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faknow.model.content_based.html" class="btn btn-neutral float-right" title="faknow.model.content_based" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, NPURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

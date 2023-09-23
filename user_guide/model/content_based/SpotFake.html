@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpotFake &mdash; FaKnow 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="MCAN" href="MCAN.html" />
+    <link rel="prev" title="SAFE" href="SAFE.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../model_intro.html">Model Introduction</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../model_intro.html#content-based">Content based</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="MDFEND.html">MDFEND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TEXTCNN.html">TEXTCNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EANN.html">EANN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MFAN.html">MFAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SAFE.html">SAFE</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SpotFake</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-with-faknow">Running with Faknow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="MCAN.html">MCAN</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_intro.html#social-context">Social context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_intro.html#knowledge-aware">Knowledge aware</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../run/multimodal.html">multimodal</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.config.html">faknow.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.model.html">faknow.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../model_intro.html">Model Introduction</a></li>
+      <li class="breadcrumb-item active">SpotFake</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/user_guide/model/content_based/SpotFake.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spotfake">
+<h1>SpotFake<a class="headerlink" href="#spotfake" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://ieeexplore.ieee.org/document/8919302">[paper]</a></p>
+<p><strong>Title:</strong> SpotFake: A Multi-modal Framework for Fake News Detection</p>
+<p><strong>Authors:</strong> Shivangi Singhal, Rajiv Ratn Shah, Tanmoy Chakraborty, Ponnurangam Kumaraguru, Shin’ichi Satoh</p>
+<p><strong>Abstract:</strong> A rapid growth in the amount of fake news on social media is a very serious concern in our society. It is
+usually created by manipulating images, text, audio, and videos. This indicates that there is a need of multimodal system
+for fake news detection. Though, there are multimodal fake news detection systems but they tend to solve the problem of
+fake news by considering an additional sub-task like event discriminator and finding correlations across the modalities.
+The results of fake news detection are heavily dependent on the subtask and in absence of subtask training, the performance
+of fake news detection degrade by 10% on an average. To solve this issue, we introduce SpotFake-a multi-modal framework
+for fake news detection. Our proposed solution detects fake news without taking into account any other subtasks.
+It exploits both the textual and visual features of an article. Specifically, we made use of language models (like BERT)
+to learn text features, and image features are learned from VGG-19 pre-trained on ImageNet dataset. All the experiments
+are performed on two publicly available datasets, i.e., Twitter and Weibo. The proposed model performs better than the
+current state-of-the-art on Twitter and Weibo datasets by 3.27% and 6.83%, respectively.</p>
+<img alt="../../../_images/SpotFake.png" class="align-center" src="../../../_images/SpotFake.png" />
+</section>
+<section id="running-with-faknow">
+<h2>Running with Faknow<a class="headerlink" href="#running-with-faknow" title="Permalink to this heading"></a></h2>
+<p><strong>Model Hyper-Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">text_fc2_out</span> <span class="pre">(int,</span> <span class="pre">optional)</span> <span class="pre">``:</span> <span class="pre">Output</span> <span class="pre">size</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">text</span> <span class="pre">FC2</span> <span class="pre">layer.</span> <span class="pre">Defaults</span> <span class="pre">to</span> <span class="pre">``32</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">text_fc1_out</span> <span class="pre">(int,</span> <span class="pre">optional)</span> <span class="pre">``:</span> <span class="pre">Output</span> <span class="pre">size</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">text</span> <span class="pre">FC1</span> <span class="pre">layer.</span> <span class="pre">Defaults</span> <span class="pre">to</span> <span class="pre">``2742</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dropout_p</span> <span class="pre">(float,</span> <span class="pre">optional)</span></code> : Dropout probability. Defaults to <code class="docutils literal notranslate"><span class="pre">0.4</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fine_t</span>&#160; <span class="pre">une_text_module</span> <span class="pre">(bool,</span> <span class="pre">optional)</span></code> : Fine-tune text module. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">img_fc1_out</span> <span class="pre">(int,</span> <span class="pre">optional)</span></code> : Output size for the image FC1 layer. Defaults to <code class="docutils literal notranslate"><span class="pre">2742</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">img_fc2_out</span> <span class="pre">(int,</span> <span class="pre">optional)</span></code> : Output size for the image FC2 layer. Defaults to <code class="docutils literal notranslate"><span class="pre">32</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fine_tune_vis_module</span> <span class="pre">(bool,</span> <span class="pre">optional)</span></code> : Fine-tune visual module. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fusion_output_size</span> <span class="pre">(int,</span> <span class="pre">optional)</span></code> : Output size for the fusion layer. Defaults to <code class="docutils literal notranslate"><span class="pre">35</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss_func</span> <span class="pre">(nn.Module,</span> <span class="pre">optional)</span></code> : Loss function. Defaults to <code class="docutils literal notranslate"><span class="pre">nn.BCELoss()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pre_trained_bert_name</span> <span class="pre">(str,</span> <span class="pre">optional)`</span> <span class="pre">:</span> <span class="pre">Name</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">pre-trained</span> <span class="pre">BERT</span> <span class="pre">model.</span> <span class="pre">Defaults</span> <span class="pre">to</span> <span class="pre">``&quot;bert-base-uncased&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">(int,</span> <span class="pre">optional)</span></code> : Batch size. Defaults to <code class="docutils literal notranslate"><span class="pre">8</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epochs</span> <span class="pre">(int,</span> <span class="pre">optional)</span></code> : Number of training epochs. Defaults to <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_len</span> <span class="pre">(int,</span> <span class="pre">optional)</span></code> : Maximum length for tokenization. Defaults to <code class="docutils literal notranslate"><span class="pre">500</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lr</span> <span class="pre">(float,</span> <span class="pre">optional)</span></code> : Learning rate. Defaults to <code class="docutils literal notranslate"><span class="pre">3e-5</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metrics</span> <span class="pre">(List,</span> <span class="pre">optional)</span></code> : List of evaluation metrics. Defaults to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">(str,</span> <span class="pre">optional)</span></code> : Device to run the training on (‘cpu’ or ‘cuda’). Defaults to <code class="docutils literal notranslate"><span class="pre">'cuda:0'</span></code>.</p></li>
+</ul>
+<p><strong>A Running Example:</strong></p>
+<p>Write the following code to a python file, such as run.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">faknow.run.content_based.multimodal</span> <span class="kn">import</span> <span class="n">run_spotfake</span>
+
+<span class="n">run_spotfake</span><span class="p">(</span><span class="n">train_path</span><span class="o">=</span><span class="p">,</span> <span class="n">validate_path</span><span class="o">=</span><span class="p">,</span> <span class="n">test_path</span><span class="o">=</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And then:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>run.py
+</pre></div>
+</div>
+<p>If you want to change parameters, dataset or evaluation settings, take a look at</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../config_intro.html"><span class="doc">Config Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../data_intro.html"><span class="doc">Data Module Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../train_eval_intro.html"><span class="doc">Training &amp; Evaluation Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../usage.html"><span class="doc">Usage</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SAFE.html" class="btn btn-neutral float-left" title="SAFE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MCAN.html" class="btn btn-neutral float-right" title="MCAN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, NPURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
