@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPFD &mdash; FaKnow 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="FinerFact" href="../knowledge_aware/FinerFact.html" />
+    <link rel="prev" title="GNNCL" href="GNNCL.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../model_intro.html">Model Introduction</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../model_intro.html#content-based">Content based</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../model_intro.html#social-context">Social context</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="BASE_GNN.html">BASE_GNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BIGCN.html">BIGCN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="EDDFN.html">EDDFN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GCNFN.html">GCNFN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GNNCL.html">GNNCL</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">UPFD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-with-faknow">Running with Faknow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_intro.html#knowledge-aware">Knowledge aware</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/customize_dataloaders.html">Customize DataLoaders</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.config.html">faknow.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.model.html">faknow.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../model_intro.html">Model Introduction</a></li>
+      <li class="breadcrumb-item active">UPFD</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/user_guide/model/social_context/UPFD.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="upfd">
+<h1>UPFD<a class="headerlink" href="#upfd" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3404835.3462990">[paper]</a></p>
+<p><strong>Title:</strong> User Preference-aware Fake News Detection</p>
+<p><strong>Authors:</strong> Yingtong Dou, Kai Shu, Congying Xia, Philip S. Yu, Lichao Sun</p>
+<p><strong>Abstract:</strong> Disinformation and fake news have posed detrimental effects on individuals and society in recent years,
+attracting broad attention to fake news detection. The majority of existing fake news detection algorithms focus on mining
+news content and/or the surrounding exogenous context for discovering deceptive signals; while the endogenous preference
+of a user when he/she decides to spread a piece of fake news or not is ignored. The confirmation bias theory has indicated
+that a user is more likely to spread a piece of fake news when it confirms his/her existing beliefs/preferences. Users’
+historical, social engagements such as posts provide rich information about users’ preferences toward news and have great
+potentials to advance fake news detection. However, the work on exploring user preference for fake news detection is
+somewhat limited. Therefore, in this paper, we study the novel problem of exploiting user preference for fake news detection.
+We propose a new framework, UPFD, which simultaneously captures various signals from user preferences by joint content
+and graph modeling. Experimental results on real-world datasets demonstrate the effectiveness of the proposed framework.
+We release our code and data as a benchmark for GNN-based fake news detection: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a>.</p>
+<img alt="../../../_images/UPFD.png" class="align-center" src="../../../_images/UPFD.png" />
+</section>
+<section id="running-with-faknow">
+<h2>Running with Faknow<a class="headerlink" href="#running-with-faknow" title="Permalink to this heading"></a></h2>
+<p><strong>Model Hyper-Parameters:</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">(str)</span></code> : Root directory where the dataset should be saved</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">(str)</span></code> : The name of the graph set (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;politifact&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;gossipcop&quot;</span></code>)</p></li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">feature</span> <span class="pre">(str)</span></code><span class="classifier">The node feature type (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>)</span></dt><dd><p>If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, the 10-dimensional node feature
+is composed of ten Twitter user profile attributes.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, the 300-dimensional node feature is
+composed of Twitter user historical tweets encoded by
+the <a class="reference external" href="https://spacy.io/models/en#en_core_web_lg">spaCy word2vec encoder</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, the 768-dimensional node feature is
+composed of Twitter user historical tweets encoded by the
+<a class="reference external" href="https://github.com/hanxiao/bert-as-service">bert-as-service</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>, the 310-dimensional node feature is
+composed of a 300-dimensional “spacy” vector plus a
+10-dimensional “profile” vector.</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">splits</span> <span class="pre">(List[str])</span></code> : dataset split, including ‘train’, ‘val’ and ‘test’.</p>
+<blockquote>
+<div><p>If None, [‘train’, ‘val’, ‘test’] will be used, default = <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">base_model</span> <span class="pre">(str)</span></code> : base model for UPFD, including ‘sage’, ‘gcn’, ‘gat’, ‘gcnfn’, default = <code class="docutils literal notranslate"><span class="pre">'sage'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">(int)</span></code> : batch size, default = <code class="docutils literal notranslate"><span class="pre">128</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epochs</span> <span class="pre">(int)</span></code> : number of epochs, default = <code class="docutils literal notranslate"><span class="pre">75</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lr</span> <span class="pre">(float)</span></code> : learning rate, default = <code class="docutils literal notranslate"><span class="pre">0.01</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weight_decay</span> <span class="pre">(float)</span></code> : weight decay, default = <code class="docutils literal notranslate"><span class="pre">0.01</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metrics</span> <span class="pre">(List)</span></code> : evaluation metrics, if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used, default = <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">device</span> <span class="pre">(str)</span></code> : device, default = <code class="docutils literal notranslate"><span class="pre">'cpu'</span></code></p></li>
+</ul>
+<p><strong>A Running Example:</strong></p>
+<p>Write the following code to a python file, such as run.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">faknow.run.social_context</span> <span class="kn">import</span> <span class="n">run_upfd</span>
+
+<span class="n">run_upfd</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And then:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>run.py
+</pre></div>
+</div>
+<p>If you want to change parameters, dataset or evaluation settings, take a look at</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../config_intro.html"><span class="doc">Config Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../data_intro.html"><span class="doc">Data Module Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../train_eval_intro.html"><span class="doc">Training &amp; Evaluation Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../usage.html"><span class="doc">Usage</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="GNNCL.html" class="btn btn-neutral float-left" title="GNNCL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../knowledge_aware/FinerFact.html" class="btn btn-neutral float-right" title="FinerFact" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, NPURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
