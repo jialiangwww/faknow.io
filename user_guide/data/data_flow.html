@@ -113,7 +113,7 @@ The data module is responsible for preprocessing the user input data and feeding
 There are several classic false information recognition algorithms in the algorithm model module; The data is trained
 through an embedded algorithm model, and the performance of the algorithm model is evaluated by verifying its various
 indicators. Finally, the final algorithm model is saved.</p>
-<img alt="../../_images/data_flow.png" class="align-center" src="../../_images/data_flow.png" />
+<img alt="../../images/data_flow.png" class="align-center" src="../../images/data_flow.png" />
 <ol class="arabic simple">
 <li><p>Users input raw data into the data module. In this module, the original data is transformed into PyTorch tensor format through the pre-processing class of the data set designed in advance, and the data in tensor format is finally packaged through the DataLoader class.
 For more details about data pre-processing, please read <a class="reference internal" href="text_based.html"><span class="doc">Text based false news detection</span></a> and <a class="reference internal" href="multi_info_based.html"><span class="doc">Multimodal information based false news detection</span></a>.</p></li>
