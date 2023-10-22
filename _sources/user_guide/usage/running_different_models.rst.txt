@@ -1,0 +1,9 @@
+Running Different Models
+=========================
+In Faknow, we have 3 categories of models, namely content based, social context, and knowledge aware. Since different
+categories of models have different requirements for data processing and evaluation setting, we need to configure these
+settings appropriately.
+
+Here, we present some examples to show how to these four categories models in Faknow.
+
+Content Based

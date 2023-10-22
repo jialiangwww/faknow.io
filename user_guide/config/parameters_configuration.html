@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parameters Configuration &mdash; FaKnow 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Data Module Introduction" href="../data_intro.html" />
+    <link rel="prev" title="Config Introduction" href="../config_intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../config_intro.html">Config Introduction</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../config_intro.html#how-to-set-config">How to set config?</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parameters Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-dicts">Parameter Dicts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#config-files">Config Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_guide/customize_dataloaders.html">Customize DataLoaders</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../faknow/faknow.config.html">faknow.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faknow/faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faknow/faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faknow/faknow.model.html">faknow.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faknow/faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faknow/faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faknow/faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../config_intro.html">Config Introduction</a></li>
+      <li class="breadcrumb-item active">Parameters Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/user_guide/config/parameters_configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parameters-configuration">
+<h1>Parameters Configuration<a class="headerlink" href="#parameters-configuration" title="Permalink to this heading"></a></h1>
+<p>Faknow supports two types of parameter configurations: Parameter Dicts and YAML Config Files.
+The former receives the parameters as dict keyword arguments and the latter reads them from the yaml configuration file.</p>
+<section id="parameter-dicts">
+<h2>Parameter Dicts<a class="headerlink" href="#parameter-dicts" title="Permalink to this heading"></a></h2>
+<p>Parameter Dict is realized by the dict data structure in python, where the key
+is the parameter name, and the value is the parameter value. The users can write their
+parameters into a dict, and pass it into <cite>run</cite>.</p>
+<p>An example is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">faknow.run</span> <span class="kn">import</span> <span class="n">run</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="s1">&#39;mdfend&#39;</span>  <span class="c1"># lowercase short name of models</span>
+<span class="n">kargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;train_path&#39;</span><span class="p">:</span> <span class="s1">&#39;train.json&#39;</span><span class="p">,</span> <span class="s1">&#39;test_path&#39;</span><span class="p">:</span> <span class="s1">&#39;test.json&#39;</span><span class="p">}</span>  <span class="c1"># dict arguments</span>
+<span class="n">run</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The json file for mdfend should be like:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;this is a sentence.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;this is a sentence.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="config-files">
+<h2>Config Files<a class="headerlink" href="#config-files" title="Permalink to this heading"></a></h2>
+<p>Config Files should be organized in the format of yaml.
+The users should write their parameters according to the rules aligned with
+yaml, and pass them into <cite>run_from_yaml</cite>.</p>
+<p>An example is as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">faknow.run</span> <span class="kn">import</span> <span class="n">run_from_yaml</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="s1">&#39;mdfend&#39;</span>  <span class="c1"># lowercase short name of models</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="s1">&#39;mdfend.yaml&#39;</span>  <span class="c1"># config file path</span>
+<span class="n">run_from_yaml</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">config_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Your yaml config file should be like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">train_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">train.json</span><span class="w"> </span><span class="c1"># the path of training set file</span>
+<span class="nt">test_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test.json</span><span class="w"> </span><span class="c1"># the path of testing set file</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../config_intro.html" class="btn btn-neutral float-left" title="Config Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../data_intro.html" class="btn btn-neutral float-right" title="Data Module Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, NPURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
