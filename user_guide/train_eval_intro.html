@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainer Module &mdash; FaKnow v1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="UPFD" href="model/social_context/UPFD.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Trainer Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#training-process">Training process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#auxiliary-functionalities">Auxiliary functionalities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_datasets.html">Customize DataSets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_evaluator.html">Customize Evaluator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faknow/faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faknow/faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faknow/faknow.model.html">faknow.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faknow/faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faknow/faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faknow/faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Trainer Module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/user_guide/train_eval_intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="trainer-module">
+<h1>Trainer Module<a class="headerlink" href="#trainer-module" title="Permalink to this heading"></a></h1>
+<p>To address the imperative of streamlining the training process for diverse models within FaKnow and alleviate the burden
+of repetitive work, we have ingeniously devised the trainer module. Positioned after the aforementioned data module and model
+module, this module assumes the crucial responsibility of ingesting the data into the model in batches.</p>
+<p>It encompasses a plethora of essential functionalities, including but not limited to <strong>model training</strong>, <strong>validation</strong>, <strong>testing</strong>,
+<strong>saving</strong>, <strong>logging</strong> of training progress, and <strong>visualization</strong> thereof. These functionalities are harmoniously encapsulated within
+the class called Trainer, rendering it impervious to users’ intricate internalities. By simply specifying the desired model,
+optimization algorithm, and other hyper-parameters, users can effortlessly expedite the training process. The trainer module
+further embraces advanced settings, such as gradient clipping, the learning rate scheduler, and early stopping,
+to accommodate divergent circumstances and demands.</p>
+<section id="training-process">
+<h2>Training process<a class="headerlink" href="#training-process" title="Permalink to this heading"></a></h2>
+<img alt="../_images/training_process.png" class="align-center" src="../_images/training_process.png" />
+<p>This diagram illustrates the workflow in Trainer. During the training process of the Trainer, adherence to established deep learning
+model training protocols is maintained. This involves partitioning the data into three distinct subsets: the training set, the validation set, and the test set.
+Following each training epoch, model validation is performed, while the model is tested only upon completion of all training epochs. Classification metrics including
+accuracy, precision, recall, and F1 score are subsequently computed.</p>
+</section>
+<section id="auxiliary-functionalities">
+<h2>Auxiliary functionalities<a class="headerlink" href="#auxiliary-functionalities" title="Permalink to this heading"></a></h2>
+<p>To enhance user convenience, the trainer module not only facilitates fundamental model training but also encompasses supplementary functionalities. Regarding model training, the Trainer seamlessly integrates numerous advanced configurations.</p>
+<ul class="simple">
+<li><p><strong>Gradient clipping</strong>: is invoked during the training of every batch of data to avert gradient explosion</p></li>
+<li><p><strong>Learning rate scheduler</strong>: adjusts the learning rate as instructed by the user after each epoch of training and validation to mitigate overfitting.</p></li>
+<li><p><strong>Early stopping</strong>: determines whether to prematurely terminate the training process based on the model’s performance on the validation set in each iteration and save the model with the best performance on the validation set, alongside corresponding evaluation results from all iterations.</p></li>
+<li><p><strong>Logging</strong>: shows training loss and validation results in the console and saves them to a local log file.</p></li>
+<li><p><strong>Visualization</strong>: visualizes the fluctuation curves encompassing training loss and validation results (including accuracy and other metrics) from each iteration with TensorBoard5.</p></li>
+<li><p><strong>To device</strong>: moves data and model to the specific device like Cuda or CPU. If the aforementioned features fail to cater to user requirements adequately, users may opt to inherit the Trainer class, thereby leveraging existing code as far as possible for developing new functionalities.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="model/social_context/UPFD.html" class="btn btn-neutral float-left" title="UPFD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, jialiangwww.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

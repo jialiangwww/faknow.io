@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAFE &mdash; FaKnow v1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="EANN" href="EANN.html" />
+    <link rel="prev" title="TEXTCNN" href="TEXTCNN.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../model_intro.html">Model Introduction</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../model_intro.html#content-based">Content based</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ENDEF.html">ENDEF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="M3FEND.html">M3FEND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MDFEND.html">MDFEND</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TEXTCNN.html">TEXTCNN</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CAFE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="EANN.html">EANN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HMCAN.html">HMCAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MCAN.html">MCAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MFAN.html">MFAN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SAFE.html">SAFE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpotFake.html">SpotFake</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_intro.html#social-context">Social context</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../train_eval_intro.html">Trainer Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/customize_datasets.html">Customize DataSets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/customize_evaluator.html">Customize Evaluator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.model.html">faknow.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faknow/faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../model_intro.html">Model Introduction</a></li>
+      <li class="breadcrumb-item active">CAFE</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/user_guide/model/content_based/CAFE.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cafe">
+<h1>CAFE<a class="headerlink" href="#cafe" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://dl.acm.org/doi/10.1145/3485447.3511968">[paper]</a></p>
+<p><strong>Title:</strong> Cross-modal Ambiguity Learning for Multimodal Fake News Detection</p>
+<p><strong>Authors:</strong> Yixuan Chen, Dongsheng Li, Peng Zhang, Jie Sui, Qin Lv, Lu Tun, Li Shang</p>
+<p><strong>Abstract:</strong> Cross-modal learning is essential to enable accurate fake news detection due to the fast-growing multimodal
+contents in online social communities. A fundamental challenge of multimodal fake news detection lies in the inherent ambiguity
+across different content modalities, i.e., decisions made from unimodalities may disagree with each other, which may lead
+to inferior multimodal fake news detection. To address this issue, we formulate the cross-modal ambiguity learning problem
+from an information-theoretic perspective and propose CAFE — an ambiguity-aware multimodal fake news detection method.
+CAFE consists of 1) a cross-modal alignment module to transform the heterogeneous unimodality features into a shared semantic
+space, 2) a cross-modal ambiguity learning module to estimate the ambiguity between different modalities, and 3) a
+cross-modal fusion module to capture the cross-modal correlations. CAFE improves fake news detection accuracy by judiciously
+and adaptively aggregating unimodal features and cross-modal correlations, i.e., relying on unimodal features when cross-modal
+ambiguity is weak and referring to cross-modal correlations when cross-modal ambiguity is strong. Experimental studies on
+two widely used datasets (Twitter and Weibo) demonstrate that CAFE outperforms state-of-the-art fake news detection methods
+by 2.2-18.9% and 1.7-11.4% on accuracy, respectively.</p>
+<img alt="../../../_images/CAFE.png" class="align-center" src="../../../_images/CAFE.png" />
+<p>For source code, please refer to <a class="reference internal" href="../../../faknow/faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.cafe"><span class="std std-ref">CAFE</span></a></p>
+<p>If you want to change parameters, dataset or evaluation settings, take a look at</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../config_intro.html"><span class="doc">Config Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../data_intro.html"><span class="doc">Data Module Introduction</span></a></p></li>
+<li><p><a class="reference internal" href="../../train_eval_intro.html"><span class="doc">Trainer Module</span></a></p></li>
+<li><p><a class="reference internal" href="../../usage.html"><span class="doc">Usage</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="TEXTCNN.html" class="btn btn-neutral float-left" title="TEXTCNN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="EANN.html" class="btn btn-neutral float-right" title="EANN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, jialiangwww.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.run.social_context &mdash; FaKnow v1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="faknow.train" href="faknow.train.html" />
+    <link rel="prev" title="faknow.run.content_based.multimodal" href="faknow.run.content_based.multimodal.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/train_eval_intro.html">Trainer Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_datasets.html">Customize DataSets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_evaluator.html">Customize Evaluator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.model.html">faknow.model</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="faknow.run.html">faknow.run</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="faknow.run.content_based.html">faknow.run.content_based</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">faknow.run.social_context</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_bigcn">faknow.run.social_context.run_bigcn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_bigcn.run_bigcn"><code class="docutils literal notranslate"><span class="pre">run_bigcn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_bigcn.run_bigcn_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_bigcn_from_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_dudef">faknow.run.social_context.run_dudef</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_dudef.run_dudef"><code class="docutils literal notranslate"><span class="pre">run_dudef()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_ebgcn">faknow.run.social_context.run_ebgcn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_ebgcn.run_ebgcn"><code class="docutils literal notranslate"><span class="pre">run_ebgcn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_ebgcn.run_ebgcn_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_ebgcn_from_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_eddfn">faknow.run.social_context.run_eddfn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_eddfn.run_eddfn"><code class="docutils literal notranslate"><span class="pre">run_eddfn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_eddfn.run_eddfn_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_eddfn_from_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_fang">faknow.run.social_context.run_fang</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_fang.run_fang"><code class="docutils literal notranslate"><span class="pre">run_fang()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_fang.run_fang_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_fang_from_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_gcnfn">faknow.run.social_context.run_gcnfn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_gcnfn.run_gcnfn"><code class="docutils literal notranslate"><span class="pre">run_gcnfn()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_gcnfn.run_gcnfn_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_gcnfn_from_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_gnncl">faknow.run.social_context.run_gnncl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_gnncl.run_gnncl"><code class="docutils literal notranslate"><span class="pre">run_gnncl()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_gnncl.run_gnncl_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_gnncl_from_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_trustrd">faknow.run.social_context.run_trustrd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_trustrd.run_trustrd"><code class="docutils literal notranslate"><span class="pre">run_trustrd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_trustrd.run_trustrd_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_trustrd_from_yaml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.run.social_context.run_upfd">faknow.run.social_context.run_upfd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_upfd.run_upfd"><code class="docutils literal notranslate"><span class="pre">run_upfd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.run.social_context.run_upfd.run_upfd_from_yaml"><code class="docutils literal notranslate"><span class="pre">run_upfd_from_yaml()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.run.html#module-faknow.run.run">faknow.run.run</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="faknow.run.html">faknow.run</a></li>
+      <li class="breadcrumb-item active">faknow.run.social_context</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/faknow/faknow.run.social_context.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="faknow-run-social-context">
+<h1>faknow.run.social_context<a class="headerlink" href="#faknow-run-social-context" title="Permalink to this heading"></a></h1>
+<section id="module-faknow.run.social_context.run_bigcn">
+<span id="faknow-run-social-context-run-bigcn"></span><h2>faknow.run.social_context.run_bigcn<a class="headerlink" href="#module-faknow.run.social_context.run_bigcn" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_bigcn.run_bigcn">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_bigcn.</span></span><span class="sig-name descname"><span class="pre">run_bigcn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_dic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">td_drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bu_drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_bigcn.html#run_bigcn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_bigcn.run_bigcn" title="Permalink to this definition"></a></dt>
+<dd><p>run BiGCN, including training, validation and testing.
+If validation and testing data are not provided,
+only training is performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_data</strong> (<em>List</em>) – index list of training nodes.</p></li>
+<li><p><strong>tree_dic</strong> (<em>Dict</em>) – the dictionary of graph edge.</p></li>
+<li><p><strong>data_path</strong> (<em>str</em>) – path of data doc.</p></li>
+<li><p><strong>val_data</strong> (<em>Optional</em><em>[</em><em>List</em><em>]</em>) – index list of validation nodes, default=None</p></li>
+<li><p><strong>test_data</strong> (<em>Optional</em><em>[</em><em>List</em><em>]</em>) – index list of test nodes, default=None</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size. default=128.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – epoch num. default=200.</p></li>
+<li><p><strong>feature_size</strong> (<em>int</em>) – the feature size of input. default=5000.</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – the feature size of hidden embedding in RumorGCN.
+default=64.</p></li>
+<li><p><strong>output_size</strong> (<em>int</em>) – the feature size of output embedding in RumorGCN.
+default=64.</p></li>
+<li><p><strong>td_drop_rate</strong> (<em>float</em>) – the dropout rate of TDgraph. default=0.2.</p></li>
+<li><p><strong>bu_drop_rate</strong> (<em>float</em>) – the dropout rate of BUgraph. default=0.2.</p></li>
+<li><p><strong>lower</strong> (<em>int</em>) – the minimum of graph size. default=2.</p></li>
+<li><p><strong>upper</strong> (<em>int</em>) – the maximum of graph size. default=100000.</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate. default=0.0005.</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – weight decay. default=0.0001.</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – metrics for evaluation,
+if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used,
+default=None</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device. default=’cpu’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_bigcn.run_bigcn_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_bigcn.</span></span><span class="sig-name descname"><span class="pre">run_bigcn_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_bigcn.html#run_bigcn_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_bigcn.run_bigcn_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run BiGCN from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_dudef">
+<span id="faknow-run-social-context-run-dudef"></span><h2>faknow.run.social_context.run_dudef<a class="headerlink" href="#module-faknow.run.social_context.run_dudef" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_dudef.run_dudef">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_dudef.</span></span><span class="sig-name descname"><span class="pre">run_dudef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baidu_arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dalianligong_arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boson_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auxiliary_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr_param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_dudef.html#run_dudef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_dudef.run_dudef" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em>) – Root directory where the dataset should be saved</p></li>
+<li><p><strong>dict</strong><strong>[</strong><strong>ndarray</strong><strong>]</strong> (<em>embeddings_index</em>) – word vectors, for example:’!’:[0.618666,…]</p></li>
+<li><p><strong>baidu_arr</strong> (<em>Callable</em>) – Function to calculate emotions using Baidu API.</p></li>
+<li><p><strong>dalianligong_arr</strong> (<em>Callable</em>) – Function to calculate emotions using Dalian Ligong University’s method.</p></li>
+<li><p><strong>boson_value</strong> (<em>Callable</em>) – Function to extract boson features</p></li>
+<li><p><strong>auxiliary_features</strong> (<em>Callable</em>) – Function to extract auxiliary features from the text.</p></li>
+<li><p><strong>word_num</strong> (<em>int</em>) – size of semantics, default=6000</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs, default=50</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size, default=64</p></li>
+<li><p><strong>lr_param</strong> (<em>float</em>) – learning rate, default=0.01</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – evaluation metrics, if None, use default metrics, default=None</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device, default=’cpu’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_ebgcn">
+<span id="faknow-run-social-context-run-ebgcn"></span><h2>faknow.run.social_context.run_ebgcn<a class="headerlink" href="#module-faknow.run.social_context.run_ebgcn" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_ebgcn.run_ebgcn">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_ebgcn.</span></span><span class="sig-name descname"><span class="pre">run_ebgcn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_dic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr_scale_bu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr_scale_td</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_ebgcn.html#run_ebgcn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_ebgcn.run_ebgcn" title="Permalink to this definition"></a></dt>
+<dd><p>run EBGCN, including training, validation and testing.
+If validate_path and test_path are None, only training is performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_data</strong> (<em>List</em>) – index list of training nodes.</p></li>
+<li><p><strong>tree_dic</strong> (<em>Dict</em>) – the dictionary of graph edge.</p></li>
+<li><p><strong>data_path</strong> (<em>str</em>) – path of data doc.</p></li>
+<li><p><strong>val_data</strong> (<em>Optional</em><em>[</em><em>List</em><em>]</em>) – index list of validation nodes, default=None</p></li>
+<li><p><strong>test_data</strong> (<em>Optional</em><em>[</em><em>List</em><em>]</em>) – index list of test nodes, default=None</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size. default=128.</p></li>
+<li><p><strong>input_size</strong> (<em>int</em>) – the feature size of input. default=5000.</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – the feature size of hidden embedding. default=64.</p></li>
+<li><p><strong>output_size</strong> (<em>int</em>) – the feature size of output embedding. default=64.</p></li>
+<li><p><strong>edge_num</strong> (<em>int</em>) – the num of edge type. default=2.</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – dropout rate. default=0.5.</p></li>
+<li><p><strong>num_class</strong> (<em>int</em>) – the num of output type. default=4</p></li>
+<li><p><strong>edge_loss_weight</strong> (<em>float</em>) – the weight of edge loss. default=0.2.</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate. default=0.0005.</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – weight decay. default=0.1.</p></li>
+<li><p><strong>lr_scale_bu</strong> (<em>int</em>) – learning rate scale for down-top direction. default=5.</p></li>
+<li><p><strong>lr_scale_td</strong> (<em>int</em>) – learning rate scale for top-down direction. default=1.</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – metrics for evaluation, if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used, default=None</p></li>
+<li><p><strong>num_epochs</strong> (<em>int</em>) – epoch num. default=200.</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device. default=’cpu’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_ebgcn.run_ebgcn_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_ebgcn.</span></span><span class="sig-name descname"><span class="pre">run_ebgcn_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_ebgcn.html#run_ebgcn_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_ebgcn.run_ebgcn_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run EBGCN from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_eddfn">
+<span id="faknow-run-social-context-run-eddfn"></span><h2>faknow.run.social_context.run_eddfn<a class="headerlink" href="#module-faknow.run.social_context.run_eddfn" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_eddfn.run_eddfn">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_eddfn.</span></span><span class="sig-name descname"><span class="pre">run_eddfn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_pool_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_pool_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_embedding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">budget_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_h</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_eddfn.html#run_eddfn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_eddfn.run_eddfn" title="Permalink to this definition"></a></dt>
+<dd><p>run EDDFN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_pool_input</strong> (<em>Tensor</em>) – train pool input, shape=(train_pool_size, input_size)</p></li>
+<li><p><strong>train_pool_label</strong> (<em>Tensor</em>) – train pool label, shape=(train_pool_size, )</p></li>
+<li><p><strong>domain_embedding</strong> (<em>Tensor</em>) – domain embedding, shape=(train_pool_size, domain_size)</p></li>
+<li><p><strong>budget_size</strong> (<em>float</em>) – budget size, default=0.8</p></li>
+<li><p><strong>num_h</strong> (<em>int</em>) – number of hash functions, default=10</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size, default=32</p></li>
+<li><p><strong>num_epochs</strong> (<em>int</em>) – number of epochs, default=100</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate, default=0.02</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – evaluation metrics, if None, use default metrics, default=None</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device, default=’cpu’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_eddfn.run_eddfn_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_eddfn.</span></span><span class="sig-name descname"><span class="pre">run_eddfn_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_eddfn.html#run_eddfn_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_eddfn.run_eddfn_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run EDDFN from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_fang">
+<span id="faknow-run-social-context-run-fang"></span><h2>faknow.run.social_context.run_fang<a class="headerlink" href="#module-faknow.run.social_context.run_fang" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_fang.run_fang">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_fang.</span></span><span class="sig-name descname"><span class="pre">run_fang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_stance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_stance_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_fang.html#run_fang"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_fang.run_fang" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>run FANG, including training, validation and testing.</p>
+</div></blockquote>
+<p>If validate_path and test_path are None, only training is performed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_root</strong> (<em>str</em>) – the data path. including entities.txt, entity_features.tsv, source_citation.tsv, source_publication.tsv, user_relationships.tsv, news_info.tsv, report.tsv, support_neutral.tsv, support_negative.tsv, deny.tsv. example referring to dataset/example/FANG.</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – metrics for evaluation, if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used, default=None</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate. default=1e-4.</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – weight dacay. default=5e-4.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size. default=32.</p></li>
+<li><p><strong>num_epochs</strong> (<em>int</em>) – epoch num. default=100.</p></li>
+<li><p><strong>input_size</strong> (<em>int</em>) – embedding size of raw feature. default=100.</p></li>
+<li><p><strong>embedding_size</strong> (<em>int</em>) – graphsage output size. default=16.</p></li>
+<li><p><strong>num_stance</strong> (<em>int</em>) – total num of stance. default=4.</p></li>
+<li><p><strong>num_stance_hidden</strong> (<em>int</em>) – stance’s embedding size. please let num_stance_hidden * num_stance = embedding_size. default=4.</p></li>
+<li><p><strong>timestamp_size</strong> (<em>int</em>) – timestamp’s embedding size. default=2</p></li>
+<li><p><strong>num_classes</strong> (<em>int</em>) – label num. default=2.</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – dropout rate. default=0.1.</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – compute device. default=’cpu’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_fang.run_fang_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_fang.</span></span><span class="sig-name descname"><span class="pre">run_fang_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_fang.html#run_fang_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_fang.run_fang_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run FANG from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_gcnfn">
+<span id="faknow-run-social-context-run-gcnfn"></span><h2>faknow.run.social_context.run_gcnfn<a class="headerlink" href="#module-faknow.run.social_context.run_gcnfn" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_gcnfn.run_gcnfn">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_gcnfn.</span></span><span class="sig-name descname"><span class="pre">run_gcnfn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'content'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_gcnfn.html#run_gcnfn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_gcnfn.run_gcnfn" title="Permalink to this definition"></a></dt>
+<dd><p>run GCNFN using UPFD dataset, including training, validation and testing.
+If validation and testing data are not provided, only training is performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<em>str</em>) – Root directory where the dataset should be saved</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the graph set (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;politifact&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;gossipcop&quot;</span></code>)</p></li>
+<li><p><strong>feature</strong> (<em>str</em>) – The node feature type (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>)
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, the 10-dimensional node feature
+is composed of ten Twitter user profile attributes.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, the 300-dimensional node feature is
+composed of Twitter user historical tweets encoded by
+the <a class="reference external" href="https://spacy.io/models/en#en_core_web_lg">spaCy word2vec encoder</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, the 768-dimensional node feature is
+composed of Twitter user historical tweets encoded by the
+<a class="reference external" href="https://github.com/hanxiao/bert-as-service">bert-as-service</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>, the 310-dimensional node feature is
+composed of a 300-dimensional “spacy” vector plus a
+10-dimensional “profile” vector. default=’content’</p></li>
+<li><p><strong>splits</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – dataset split, including ‘train’, ‘val’ and ‘test’.
+If None, [‘train’, ‘val’, ‘test’] will be used. Default=None</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size, default=128</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs, default=100</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer, default=128</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate, default=0.001</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – weight decay, default=0.01</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – evaluation metrics, if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used, default=None</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device, default=’cpu’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_gcnfn.run_gcnfn_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_gcnfn.</span></span><span class="sig-name descname"><span class="pre">run_gcnfn_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_gcnfn.html#run_gcnfn_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_gcnfn.run_gcnfn_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run GCNFN from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_gnncl">
+<span id="faknow-run-social-context-run-gnncl"></span><h2>faknow.run.social_context.run_gnncl<a class="headerlink" href="#module-faknow.run.social_context.run_gnncl" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_gnncl.run_gnncl">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_gnncl.</span></span><span class="sig-name descname"><span class="pre">run_gnncl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'profile'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_gnncl.html#run_gnncl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_gnncl.run_gnncl" title="Permalink to this definition"></a></dt>
+<dd><p>run GNNCL using UPFD dataset, including training, validation and testing.
+If validation and testing data are not provided, only training is performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<em>str</em>) – Root directory where the dataset should be saved</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the graph set (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;politifact&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;gossipcop&quot;</span></code>)</p></li>
+<li><p><strong>feature</strong> (<em>str</em>) – <p>The node feature type (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>)
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, the 10-dimensional node feature
+is composed of ten Twitter user profile attributes.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, the 300-dimensional node feature is
+composed of Twitter user historical tweets encoded by
+the <a class="reference external" href="https://spacy.io/models/en#en_core_web_lg">spaCy word2vec encoder</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, the 768-dimensional node feature is
+composed of Twitter user historical tweets encoded by the
+<a class="reference external" href="https://github.com/hanxiao/bert-as-service">bert-as-service</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>, the 310-dimensional node feature is
+composed of a 300-dimensional “spacy” vector plus a
+10-dimensional “profile” vector. default=’profile’</p>
+</p></li>
+<li><p><strong>splits</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – dataset split, including ‘train’, ‘val’ and ‘test’.
+If None, [‘train’, ‘val’, ‘test’] will be used. Default=None</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size, default=128</p></li>
+<li><p><strong>max_nodes</strong> (<em>int</em>) – max number of nodes, default=500</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate, default=0.001</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs, default=60</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – evaluation metrics, if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used, default=None</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device, default=’cpu’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_gnncl.run_gnncl_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_gnncl.</span></span><span class="sig-name descname"><span class="pre">run_gnncl_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_gnncl.html#run_gnncl_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_gnncl.run_gnncl_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run GNNCL from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_trustrd">
+<span id="faknow-run-social-context-run-trustrd"></span><h2>faknow.run.social_context.run_trustrd<a class="headerlink" href="#module-faknow.run.social_context.run_trustrd" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_trustrd.run_trustrd">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_trustrd.</span></span><span class="sig-name descname"><span class="pre">run_trustrd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_dic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_train_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_gcn_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0005</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_trustrd.html#run_trustrd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_trustrd.run_trustrd" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_data</strong> (<em>List</em>) – index list of training nodes.</p></li>
+<li><p><strong>tree_dic</strong> (<em>Dict</em>) – the dictionary of graph edge.</p></li>
+<li><p><strong>data_path</strong> (<em>str</em>) – path of data doc.</p></li>
+<li><p><strong>val_data</strong> (<em>Optional</em><em>[</em><em>List</em><em>]</em>) – index list of validation nodes, default=None</p></li>
+<li><p><strong>test_data</strong> (<em>Optional</em><em>[</em><em>List</em><em>]</em>) – index list of test nodes, default=None</p></li>
+<li><p><strong>sigma_m</strong> (<em>float</em>) – data perturbation Standard Deviation. default=0.1</p></li>
+<li><p><strong>eta</strong> (<em>float</em>) – data perturbation weight. default=0.4.</p></li>
+<li><p><strong>zeta</strong> (<em>float</em>) – parameter perturbation weight. default=0.02</p></li>
+<li><p><strong>drop_rate</strong> (<em>float</em>) – drop rate of edge. default=0.4.</p></li>
+<li><p><strong>input_feature</strong> (<em>int</em>) – the feature size of input. default=192.</p></li>
+<li><p><strong>hidden_feature</strong> (<em>int</em>) – the feature size of hidden embedding. default=64.</p></li>
+<li><p><strong>num_classes</strong> (<em>int</em>) – the num of class. default=4.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size. default=128.</p></li>
+<li><p><strong>pre_train_epoch</strong> (<em>int</em>) – pretrained epoch num. default=25.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – epoch num. default=200.</p></li>
+<li><p><strong>net_hidden_dim</strong> (<em>int</em>) – the feature size of hidden embedding. defult=64.</p></li>
+<li><p><strong>net_gcn_layers</strong> (<em>int</em>) – the gcn encoder layer num. default=3.</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate. default=0.0005.</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – weight decay. default=1e-4.</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – metrics for evaluation, if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used, default=None</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device. default=’cpu’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_trustrd.run_trustrd_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_trustrd.</span></span><span class="sig-name descname"><span class="pre">run_trustrd_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_trustrd.html#run_trustrd_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_trustrd.run_trustrd_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run TrustRD from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.run.social_context.run_upfd">
+<span id="faknow-run-social-context-run-upfd"></span><h2>faknow.run.social_context.run_upfd<a class="headerlink" href="#module-faknow.run.social_context.run_upfd" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_upfd.run_upfd">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_upfd.</span></span><span class="sig-name descname"><span class="pre">run_upfd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bert'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sage'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_upfd.html#run_upfd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_upfd.run_upfd" title="Permalink to this definition"></a></dt>
+<dd><p>run UPFD using UPFD dataset, including training, validation and testing.
+If validation and testing data are not provided, only training is performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<em>str</em>) – Root directory where the dataset should be saved</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – The name of the graph set (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;politifact&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;gossipcop&quot;</span></code>)</p></li>
+<li><p><strong>feature</strong> (<em>str</em>) – <p>The node feature type (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>)
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;profile&quot;</span></code>, the 10-dimensional node feature
+is composed of ten Twitter user profile attributes.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;spacy&quot;</span></code>, the 300-dimensional node feature is
+composed of Twitter user historical tweets encoded by
+the <a class="reference external" href="https://spacy.io/models/en#en_core_web_lg">spaCy word2vec encoder</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;bert&quot;</span></code>, the 768-dimensional node feature is
+composed of Twitter user historical tweets encoded by the
+<a class="reference external" href="https://github.com/hanxiao/bert-as-service">bert-as-service</a>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code>, the 310-dimensional node feature is
+composed of a 300-dimensional “spacy” vector plus a
+10-dimensional “profile” vector. default=’bert’</p>
+</p></li>
+<li><p><strong>splits</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – dataset split, including ‘train’, ‘val’ and ‘test’.
+If None, [‘train’, ‘val’, ‘test’] will be used, default=None</p></li>
+<li><p><strong>base_model</strong> (<em>str</em>) – base model for UPFD, including ‘sage’, ‘gcn’, ‘gat’, ‘gcnfn’, default=’sage’</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – batch size, default=128</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs, default=30</p></li>
+<li><p><strong>lr</strong> (<em>float</em>) – learning rate, default=0.01</p></li>
+<li><p><strong>weight_decay</strong> (<em>float</em>) – weight decay, default=0.01</p></li>
+<li><p><strong>metrics</strong> (<em>List</em>) – evaluation metrics, if None, [‘accuracy’, ‘precision’, ‘recall’, ‘f1’] is used, default=None</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – device, default=’cpu’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.run.social_context.run_upfd.run_upfd_from_yaml">
+<span class="sig-prename descclassname"><span class="pre">faknow.run.social_context.run_upfd.</span></span><span class="sig-name descname"><span class="pre">run_upfd_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/run/social_context/run_upfd.html#run_upfd_from_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.run.social_context.run_upfd.run_upfd_from_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>run UPFD from yaml config file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – yaml config file path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="faknow.run.content_based.multimodal.html" class="btn btn-neutral float-left" title="faknow.run.content_based.multimodal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faknow.train.html" class="btn btn-neutral float-right" title="faknow.train" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, jialiangwww.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

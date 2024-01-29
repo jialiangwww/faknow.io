@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.model.layers.dct &mdash; FaKnow v1 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../developer_guide/customize_dataloaders.html">Customize DataLoaders</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.data.html">faknow.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.evaluate.html">faknow.evaluate package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.model.html">faknow.model package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.run.html">faknow.run package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.train.html">faknow.train package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.utils.html">faknow.utils package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">faknow.model.layers.dct</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>faknow.model.layers.dct 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">layers for Discrete Cosine Transform in MCAN</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="conv2d_bn_relu"><a class="viewcode-back" href="../../../../faknow/faknow.model.layers.html#faknow.model.layers.dct.conv2d_bn_relu">[文档]</a><span class="k">def</span> <span class="nf">conv2d_bn_relu</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span>
+                   <span class="n">out_channels</span><span class="p">,</span>
+                   <span class="n">kernel_size</span><span class="p">,</span>
+                   <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">padding</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">in_channels</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="n">out_channels</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">),</span>
+            <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">),</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DctStem"><a class="viewcode-back" href="../../../../faknow/faknow.model.layers.html#faknow.model.layers.dct.DctStem">[文档]</a><span class="k">class</span> <span class="nc">DctStem</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="DctStem.__init__"><a class="viewcode-back" href="../../../../faknow/faknow.model.layers.html#faknow.model.layers.dct.DctStem.__init__">[文档]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kernel_sizes</span><span class="p">,</span> <span class="n">num_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DctStem</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convs</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                           <span class="n">out_channels</span><span class="o">=</span><span class="n">num_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                           <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span>
+                <span class="n">in_channels</span><span class="o">=</span><span class="n">num_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">out_channels</span><span class="o">=</span><span class="n">num_channels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_sizes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span>
+                <span class="n">in_channels</span><span class="o">=</span><span class="n">num_channels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">out_channels</span><span class="o">=</span><span class="n">num_channels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_sizes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="DctStem.forward"><a class="viewcode-back" href="../../../../faknow/faknow.model.layers.html#faknow.model.layers.dct.DctStem.forward">[文档]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dct_img</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">dct_img</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">img</span></div></div>
+
+
+<div class="viewcode-block" id="DctInceptionBlock"><a class="viewcode-back" href="../../../../faknow/faknow.model.layers.html#faknow.model.layers.dct.DctInceptionBlock">[文档]</a><span class="k">class</span> <span class="nc">DctInceptionBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<div class="viewcode-block" id="DctInceptionBlock.__init__"><a class="viewcode-back" href="../../../../faknow/faknow.model.layers.html#faknow.model.layers.dct.DctInceptionBlock.__init__">[文档]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">in_channel</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+        <span class="n">branch1_channels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">branch2_channels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">branch3_channels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">branch4_channels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DctInceptionBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">branch4_channels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">branch4_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">branch3_channels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">branch3_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">96</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">branch2_channels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">branch2_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">48</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">branch1_channels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">branch1_channels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch1</span> <span class="o">=</span> <span class="n">conv2d_bn_relu</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">in_channel</span><span class="p">,</span>
+                                      <span class="n">out_channels</span><span class="o">=</span><span class="n">branch1_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                      <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">in_channel</span><span class="p">,</span>
+                           <span class="n">out_channels</span><span class="o">=</span><span class="n">branch2_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                           <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span>
+                <span class="n">in_channels</span><span class="o">=</span><span class="n">branch2_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">out_channels</span><span class="o">=</span><span class="n">branch2_channels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">in_channel</span><span class="p">,</span>
+                           <span class="n">out_channels</span><span class="o">=</span><span class="n">branch3_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                           <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span>
+                <span class="n">in_channels</span><span class="o">=</span><span class="n">branch3_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">out_channels</span><span class="o">=</span><span class="n">branch3_channels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span>
+                <span class="n">in_channels</span><span class="o">=</span><span class="n">branch3_channels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">out_channels</span><span class="o">=</span><span class="n">branch3_channels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch4</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+            <span class="n">conv2d_bn_relu</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">in_channel</span><span class="p">,</span>
+                           <span class="n">out_channels</span><span class="o">=</span><span class="n">branch4_channels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                           <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="DctInceptionBlock.forward"><a class="viewcode-back" href="../../../../faknow/faknow.model.layers.html#faknow.model.layers.dct.DctInceptionBlock.forward">[文档]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">out1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch4</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">out1</span><span class="p">,</span> <span class="n">out2</span><span class="p">,</span> <span class="n">out3</span><span class="p">,</span> <span class="n">out4</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, jialiangwww.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

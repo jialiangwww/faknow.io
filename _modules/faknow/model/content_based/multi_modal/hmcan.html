@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.model.content_based.multi_modal.hmcan &mdash; FaKnow v1 文档</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../../_static/translations.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user_guide/train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../developer_guide/customize_dataloaders.html">Customize DataLoaders</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faknow/faknow.data.html">faknow.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faknow/faknow.evaluate.html">faknow.evaluate package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faknow/faknow.model.html">faknow.model package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faknow/faknow.run.html">faknow.run package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faknow/faknow.train.html">faknow.train package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faknow/faknow.utils.html">faknow.utils package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">faknow.model.content_based.multi_modal.hmcan</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>faknow.model.content_based.multi_modal.hmcan 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertModel</span>
+<span class="kn">from</span> <span class="nn">faknow.model.model</span> <span class="kn">import</span> <span class="n">AbstractModel</span>
+<span class="kn">from</span> <span class="nn">faknow.model.layers.transformer</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AddNorm</span><span class="p">,</span> <span class="n">MultiHeadAttention</span><span class="p">,</span> <span class="n">FFN</span><span class="p">,</span>
+                                             <span class="n">PositionalEncoding</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="HMCAN"><a class="viewcode-back" href="../../../../../faknow/faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN">[文档]</a><span class="k">class</span> <span class="nc">HMCAN</span><span class="p">(</span><span class="n">AbstractModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    HMCAN: Hierarchical Multi-modal Contextual Attention Network for fake news Detection, SIGIR 2021</span>
+<span class="sd">    paper: https://dl.acm.org/doi/10.1145/3404835.3462871</span>
+<span class="sd">    code: https://github.com/wangjinguang502/HMCAN</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HMCAN.__init__"><a class="viewcode-back" href="../../../../../faknow/faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.__init__">[文档]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">left_num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">left_num_heads</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                 <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                 <span class="n">right_num_layers</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">right_num_heads</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+                 <span class="n">pre_trained_bert_name</span><span class="o">=</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            left_num_layers(int): the numbers of  the left Attention&amp;FFN layer</span>
+<span class="sd">                in Contextual Transformer, Default=2.</span>
+<span class="sd">            left_num_heads(int): the numbers of head in</span>
+<span class="sd">                Multi-Head Attention layer(in the left Attention&amp;FFN),</span>
+<span class="sd">                Default=12.</span>
+<span class="sd">            dropout(float): dropout rate, Default=0.1.</span>
+<span class="sd">            right_num_layers(int): the numbers of the right Attention&amp;FFN layer</span>
+<span class="sd">                in Contextual Transformer, Default=2.</span>
+<span class="sd">            right_num_heads(int): the numbers of head in</span>
+<span class="sd">                Multi-Head Attention layer(in the right Attention&amp;FFN),</span>
+<span class="sd">                Default=12.</span>
+<span class="sd">            alpha(float): the weight of the first Attention&amp;FFN layer&#39;s output,</span>
+<span class="sd">                Default=0.7.</span>
+<span class="sd">            pre_trained_bert_name(str): the bert name str. default=&#39;bert-base-uncased&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HMCAN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span> <span class="o">=</span> <span class="mi">768</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loss_func</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+        <span class="c1"># text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bert</span> <span class="o">=</span> <span class="n">BertModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+            <span class="n">pre_trained_bert_name</span><span class="p">,</span>
+            <span class="n">output_hidden_states</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># image</span>
+        <span class="n">resnet50</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span>
+            <span class="n">weights</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ResNet50_Weights</span><span class="o">.</span><span class="n">IMAGENET1K_V1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">resnet50</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resnet50</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="n">resnet50</span><span class="o">.</span><span class="n">children</span><span class="p">())[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">768</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_bn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="mi">768</span><span class="p">)</span>
+
+        <span class="c1"># Contextual Transformer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contextual_transform1</span> <span class="o">=</span> <span class="n">_TextImageTransformer</span><span class="p">(</span>
+            <span class="n">left_num_layers</span><span class="p">,</span> <span class="n">left_num_heads</span><span class="p">,</span> <span class="n">right_num_layers</span><span class="p">,</span> <span class="n">right_num_heads</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contextual_transform2</span> <span class="o">=</span> <span class="n">_TextImageTransformer</span><span class="p">(</span>
+            <span class="n">left_num_layers</span><span class="p">,</span> <span class="n">left_num_heads</span><span class="p">,</span> <span class="n">right_num_layers</span><span class="p">,</span> <span class="n">right_num_heads</span><span class="p">,</span>
+            <span class="n">dropout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dims</span><span class="p">)</span>
+
+        <span class="c1"># Classifier</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">768</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="kc">True</span><span class="p">),</span>
+                                        <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="HMCAN.forward"><a class="viewcode-back" href="../../../../../faknow/faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.forward">[文档]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_id</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">image</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            token_id (Tensor): text token ids</span>
+<span class="sd">            image (Tensor): image pixels</span>
+<span class="sd">            mask (torch.Tensor): text masks</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: prediction of being fake news, shape=(batch_size, 2)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">semantics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bert</span><span class="p">(</span><span class="n">token_id</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">hidden_states</span><span class="p">[</span>
+                    <span class="mi">1</span><span class="p">:]</span>  <span class="c1"># extract features from all the 12 block in bert-base model</span>
+        <span class="n">text_embeding</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">text_excerpt</span> <span class="o">=</span> <span class="n">semantics</span><span class="p">[</span><span class="mi">0</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">semantics</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">semantics</span><span class="p">[</span>
+                <span class="mi">2</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">semantics</span><span class="p">[</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">text_embeding</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text_excerpt</span><span class="p">)</span>
+
+        <span class="n">image_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resnet50</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">image_features</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_bn</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_conv</span><span class="p">(</span><span class="n">image_features</span><span class="p">)))</span>  <span class="c1"># [batch_size, 768, 4, 4]</span>
+        <span class="n">image_features</span> <span class="o">=</span> <span class="n">image_features</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">image_features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                             <span class="n">image_features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">image_features</span> <span class="o">=</span> <span class="n">image_features</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+                                                <span class="mi">1</span><span class="p">)</span>  <span class="c1"># [batch_size, 16, 768]</span>
+
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>  <span class="c1"># ban mask</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">text_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contextual_transform1</span><span class="p">(</span><span class="n">text_embeding</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                                    <span class="n">image_features</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">image_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contextual_transform2</span><span class="p">(</span><span class="n">image_features</span><span class="p">,</span>
+                                                    <span class="n">text_embeding</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+            <span class="n">output_feature</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">text_image</span> <span class="o">+</span> <span class="p">(</span>
+                    <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">image_text</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output_feature</span><span class="p">)</span>
+
+        <span class="n">classifier_input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">output</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">classifier_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">classifier_input</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">classifier_output</span></div>
+
+<div class="viewcode-block" id="HMCAN.calculate_loss"><a class="viewcode-back" href="../../../../../faknow/faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.calculate_loss">[文档]</a>    <span class="k">def</span> <span class="nf">calculate_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        calculate total loss</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data(Dict[str, any]): batch data dict</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: total_loss</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">token_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">][</span><span class="s1">&#39;token_id&#39;</span><span class="p">]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">][</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">token_id</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_func</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">loss</span></div>
+
+<div class="viewcode-block" id="HMCAN.predict"><a class="viewcode-back" href="../../../../../faknow/faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.predict">[文档]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_without_label</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        predict the probability of being fake news</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data_without_label (Dict[str, Any]): batch data dict</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: softmax probability, shape=(batch_size, 2)</span>
+<span class="sd">         &quot;&quot;&quot;</span>
+        <span class="n">token_id</span> <span class="o">=</span> <span class="n">data_without_label</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">][</span><span class="s1">&#39;token_id&#39;</span><span class="p">]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">data_without_label</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">][</span><span class="s1">&#39;mask&#39;</span><span class="p">]</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">data_without_label</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">token_id</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pred</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">_TextImageTransformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contextual Attention Network of combining image features with text feature</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left_num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">left_num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">right_num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">right_num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                 <span class="n">feature_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            left_num_layers(int): layer num of the left transformer block.</span>
+<span class="sd">            left_num_heads(int): heads num in the left transformer block.</span>
+<span class="sd">            right_num_layers(int): layer num of the right transformer block.</span>
+<span class="sd">            right_num_heads(int): heads num of the right transformer block.</span>
+<span class="sd">            dropout(float): dropout rate.</span>
+<span class="sd">            feature_dim(int): feature dimension of input.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">feature_dim</span><span class="p">)</span>
+        <span class="n">input_dim</span> <span class="o">=</span> <span class="n">feature_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">PositionalEncoding</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer1</span> <span class="o">=</span> <span class="n">_TransformerEncoder</span><span class="p">(</span><span class="n">left_num_layers</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span>
+                                                <span class="n">left_num_heads</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span>
+                                                <span class="n">dropout</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">transformer2</span> <span class="o">=</span> <span class="n">_TransformerEncoder</span><span class="p">(</span><span class="n">right_num_layers</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span>
+                                                <span class="n">right_num_heads</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span>
+                                                <span class="n">dropout</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">left_features</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">right_features</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">left_mask</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">right_mask</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            left_features(Tensor): the left transformer&#39;s input,</span>
+<span class="sd">                shape=(batch_size, length, embedding_dim).</span>
+<span class="sd">            right_features(Tensor): the right transformer&#39;s input,</span>
+<span class="sd">                shape=(batch_size, length, embedding_dim).</span>
+<span class="sd">            left_mask(Union[Tensor, None]): the mask of left input,</span>
+<span class="sd">                shape=(batch_size, ...).</span>
+<span class="sd">            right_mask(Union[Tensor, None]): the mask of right input,</span>
+<span class="sd">                shape=(batch_size, ...)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: shape=(batch_size, 2 * embedding_dim)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">left_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_norm</span><span class="p">(</span><span class="n">left_features</span><span class="p">)</span>
+        <span class="n">left_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">left_features</span><span class="p">)</span>
+        <span class="n">left_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer1</span><span class="p">(</span><span class="n">left_features</span><span class="p">,</span> <span class="n">left_features</span><span class="p">,</span>
+                                          <span class="n">left_features</span><span class="p">,</span> <span class="n">left_mask</span><span class="p">)</span>
+        <span class="n">left_pooled</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">left_features</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">right_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer2</span><span class="p">(</span><span class="n">right_features</span><span class="p">,</span> <span class="n">left_features</span><span class="p">,</span>
+                                           <span class="n">left_features</span><span class="p">,</span> <span class="n">right_mask</span><span class="p">)</span>
+        <span class="n">right_pooled</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">right_features</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">left_pooled</span><span class="p">,</span> <span class="n">right_pooled</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_TransformerEncoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transformer for TextImage_Transformer(Contextual Transformer)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">feature_dims</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dropout</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        num_layer(int): layer num of attention block.</span>
+<span class="sd">        input_dim(int): input dimension.</span>
+<span class="sd">        num_heads(int): head num of attention block.</span>
+<span class="sd">        feature_dims(int): dim of attention block&#39;s outputs.</span>
+<span class="sd">        dropout(float): dropout rate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_dim</span> <span class="o">=</span> <span class="n">input_dim</span>
+        <span class="k">assert</span> <span class="n">num_layers</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder_layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span>
+            <span class="n">_TransformerEncoderLayer</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">feature_dims</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span>
+                                     <span class="n">dropout</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">)</span>
+        <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">mask</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="kc">None</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        query(Tensor): shape=(batch_size, q_num, d)</span>
+<span class="sd">        key(Tensor): shape=(batch_size, k-v_num, d)</span>
+<span class="sd">        value(Tensor): shape=(batch_size, k-v_num, v-dim)</span>
+<span class="sd">        mask(Union[Tensor, None]): shape=(batch_size, ...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">sources</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">encoder_layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder_layers</span><span class="p">:</span>
+            <span class="n">sources</span> <span class="o">=</span> <span class="n">encoder_layer</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sources</span>
+
+
+<span class="k">class</span> <span class="nc">_TransformerEncoderLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transformer block for each Contextual Transformer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">input_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">ffn_hidden_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">head_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                 <span class="n">dropout</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                 <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            input_dim (int): input dimension.</span>
+<span class="sd">            ffn_hidden_size (int): hidden layer dimension of FFN.</span>
+<span class="sd">            head_num (int): number of attention heads.</span>
+<span class="sd">            dropout (float): dropout rate, default=0.</span>
+<span class="sd">            bias (bool): whether to use bias in Linear layers, default=False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">_TransformerEncoderLayer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">input_dim</span> <span class="o">%</span> <span class="n">head_num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> \
+            <span class="sa">f</span><span class="s2">&quot;model dim </span><span class="si">{</span><span class="n">input_dim</span><span class="si">}</span><span class="s2"> not divisible by </span><span class="si">{</span><span class="n">head_num</span><span class="si">}</span><span class="s2"> heads&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention</span> <span class="o">=</span> <span class="n">MultiHeadAttention</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span>
+                                            <span class="n">input_dim</span><span class="p">,</span>
+                                            <span class="n">input_dim</span><span class="p">,</span>
+                                            <span class="n">head_num</span><span class="p">,</span>
+                                            <span class="n">out_size</span><span class="o">=</span><span class="n">input_dim</span> <span class="o">//</span> <span class="n">head_num</span><span class="p">,</span>
+                                            <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span>
+                                            <span class="n">bias</span><span class="o">=</span><span class="n">bias</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addnorm1</span> <span class="o">=</span> <span class="n">AddNorm</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ffn</span> <span class="o">=</span> <span class="n">FFN</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span>
+                       <span class="n">ffn_hidden_size</span><span class="p">,</span>
+                       <span class="n">input_dim</span><span class="p">,</span>
+                       <span class="n">dropout</span><span class="p">,</span>
+                       <span class="n">activation</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">GELU</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addnorm2</span> <span class="o">=</span> <span class="n">AddNorm</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">dropout</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">query</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">key</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">value</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span>
+                <span class="n">valid_lens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            query(Tensor): shape=(batch_size, num_steps, input_size)</span>
+<span class="sd">            key(Tensor): shape=(batch_size, k-v_num, d)</span>
+<span class="sd">            value(Tensor): shape=(batch_size, k-v_num, v-dim)</span>
+<span class="sd">            valid_lens (Tensor): shape=(batch_size,), default=None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tensor: shape=(batch_size,) or (batch_size, q_num)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addnorm1</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">valid_lens</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addnorm2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ffn</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, jialiangwww.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
