@@ -186,12 +186,12 @@
         <span class="n">text</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">leaky_relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text_fc</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 
         <span class="c1"># combine Text and Image</span>
-        <span class="n">text_image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">text</span><span class="p">,</span> <span class="n">image</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">textimage</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">text</span><span class="p">,</span> <span class="n">image</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="c1"># Fake or real</span>
-        <span class="n">class_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_classifier</span><span class="p">(</span><span class="n">text_image</span><span class="p">)</span>
+        <span class="n">class_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_classifier</span><span class="p">(</span><span class="n">textimage</span><span class="p">)</span>
         <span class="c1"># Domain (which Event)</span>
-        <span class="n">reverse_feature</span> <span class="o">=</span> <span class="n">GradientReverseLayer</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">text_image</span><span class="p">,</span>
+        <span class="n">reverse_feature</span> <span class="o">=</span> <span class="n">GradientReverseLayer</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">textimage</span><span class="p">,</span>
                                                      <span class="bp">self</span><span class="o">.</span><span class="n">reverse_lambda</span><span class="p">)</span>
         <span class="n">domain_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain_classifier</span><span class="p">(</span><span class="n">reverse_feature</span><span class="p">)</span>
 

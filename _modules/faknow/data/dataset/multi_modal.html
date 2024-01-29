@@ -143,7 +143,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">transform</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_features</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">image_features</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">process_image</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">processimage</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_to_tensor</span><span class="p">()</span></div>
 
@@ -174,7 +174,7 @@
             <span class="n">item</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">return</span> <span class="n">item</span>
 
-<div class="viewcode-block" id="MultiModalDataset.process_image"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.multi_modal.MultiModalDataset.process_image">[文档]</a>    <span class="k">def</span> <span class="nf">process_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiModalDataset.processimage"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.multi_modal.MultiModalDataset.processimage">[文档]</a>    <span class="k">def</span> <span class="nf">processimage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Mark a feature as image features.</span>
 
@@ -192,7 +192,7 @@
                 <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; has already been marked as image features&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="MultiModalDataset.remove_image"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.multi_modal.MultiModalDataset.remove_image">[文档]</a>    <span class="k">def</span> <span class="nf">remove_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiModalDataset.removeimage"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.multi_modal.MultiModalDataset.removeimage">[文档]</a>    <span class="k">def</span> <span class="nf">removeimage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove a feature from image features.</span>
 

@@ -133,9 +133,9 @@
     <span class="c1"># ---  Load Data  ---</span>
     <span class="n">train_set</span> <span class="o">=</span> <span class="n">CafeDataset</span><span class="p">(</span>
         <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/train_text_with_label.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">),</span>
-        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/train_image_with_label.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">))</span>
+        <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/trainimage_with_label.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">))</span>
     <span class="n">test_set</span> <span class="o">=</span> <span class="n">CafeDataset</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/test_text_with_label.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">),</span>
-                           <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/test_image_with_label.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">))</span>
+                           <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">/testimage_with_label.npz&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">))</span>
     <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_set</span><span class="p">,</span>
                               <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
                               <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>

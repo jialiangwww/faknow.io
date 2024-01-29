@@ -224,13 +224,13 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">cnn_channel</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
                  <span class="n">cnn_kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
-                 <span class="n">shared_image_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+                 <span class="n">sharedimage_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
                  <span class="n">shared_text_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            cnn_channel (int): the number of cnn channel, default=32</span>
 <span class="sd">            cnn_kernel_size (int): the size of cnn kernel, default=(1, 2, 4, 8)</span>
-<span class="sd">            shared_image_dim: output dim of image data</span>
+<span class="sd">            sharedimage_dim: output dim of image data</span>
 <span class="sd">            shared_text_dim: output dim of text data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">_TextImageEncoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -240,11 +240,11 @@
             <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">shared_text_dim</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">shared_text_dim</span><span class="p">),</span>
             <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">shared_image</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sharedimage</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
                                           <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
                                           <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(),</span>
-                                          <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">shared_image_dim</span><span class="p">),</span>
-                                          <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">shared_image_dim</span><span class="p">),</span>
+                                          <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">sharedimage_dim</span><span class="p">),</span>
+                                          <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">sharedimage_dim</span><span class="p">),</span>
                                           <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">):</span>
@@ -258,7 +258,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">text_encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_text_encoding</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="n">text_shared</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_text_linear</span><span class="p">(</span><span class="n">text_encoding</span><span class="p">)</span>
-        <span class="n">image_shared</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_image</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">image_shared</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sharedimage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">text_shared</span><span class="p">,</span> <span class="n">image_shared</span>
 
 
@@ -316,13 +316,13 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            torch.Tensor: CosineEmbeddingLoss</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fixed_text</span><span class="p">,</span> <span class="n">matched_image</span><span class="p">,</span> <span class="n">unmatched_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_data_pairs</span><span class="p">(</span>
+        <span class="n">fixed_text</span><span class="p">,</span> <span class="n">matchedimage</span><span class="p">,</span> <span class="n">unmatchedimage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_data_pairs</span><span class="p">(</span>
             <span class="n">data</span><span class="p">)</span>
 
         <span class="n">text_aligned_match</span><span class="p">,</span> <span class="n">image_aligned_match</span><span class="p">,</span> <span class="n">similarity_match</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span>
-            <span class="n">fixed_text</span><span class="p">,</span> <span class="n">matched_image</span><span class="p">)</span>
+            <span class="n">fixed_text</span><span class="p">,</span> <span class="n">matchedimage</span><span class="p">)</span>
         <span class="n">text_aligned_unmatch</span><span class="p">,</span> <span class="n">image_aligned_unmatch</span><span class="p">,</span> <span class="n">similarity_unmatch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span>
-            <span class="n">fixed_text</span><span class="p">,</span> <span class="n">unmatched_image</span><span class="p">)</span>
+            <span class="n">fixed_text</span><span class="p">,</span> <span class="n">unmatchedimage</span><span class="p">)</span>
 
         <span class="n">similarity_label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span>
             <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">similarity_match</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -348,8 +348,8 @@
 <span class="sd">            data (Tuple[Tensor, any]): batch data, including text, image, label</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            fixed_text (Tensor): processed text data, shape=(sample_num, 30, 200)</span>
-<span class="sd">            matched_image (Tensor): processed match image data, shape=(sample_num ,512)</span>
-<span class="sd">            unmatched_image (Tensor): processed unmatch image data, shape=(sample_num, 512)</span>
+<span class="sd">            matchedimage (Tensor): processed match image data, shape=(sample_num ,512)</span>
+<span class="sd">            unmatchedimage (Tensor): processed unmatch image data, shape=(sample_num, 512)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
@@ -358,11 +358,11 @@
         <span class="c1"># index of batch news data whose label=1</span>
         <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">sample_text</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-        <span class="n">sample_image</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">sampleimage</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
         <span class="n">fixed_text</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sample_text</span><span class="p">)</span>
-        <span class="n">matched_image</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sample_image</span><span class="p">)</span>
-        <span class="n">unmatched_image</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sample_image</span><span class="p">)</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">shifts</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">fixed_text</span><span class="p">,</span> <span class="n">matched_image</span><span class="p">,</span> <span class="n">unmatched_image</span>
+        <span class="n">matchedimage</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sampleimage</span><span class="p">)</span>
+        <span class="n">unmatchedimage</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">sampleimage</span><span class="p">)</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">shifts</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fixed_text</span><span class="p">,</span> <span class="n">matchedimage</span><span class="p">,</span> <span class="n">unmatchedimage</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -413,7 +413,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">_AmbiguityModule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">encoder_text</span> <span class="o">=</span> <span class="n">_GaussianSample</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">encoder_image</span> <span class="o">=</span> <span class="n">_GaussianSample</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoderimage</span> <span class="o">=</span> <span class="n">_GaussianSample</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_encoding</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">image_encoding</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -424,11 +424,11 @@
 <span class="sd">            Tensor: the ambiguity of text and image, shape=(batch_size, 1)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p_z1_given_text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder_text</span><span class="p">(</span><span class="n">text_encoding</span><span class="p">)</span>
-        <span class="n">p_z2_given_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder_image</span><span class="p">(</span><span class="n">image_encoding</span><span class="p">)</span>
+        <span class="n">p_z2_givenimage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoderimage</span><span class="p">(</span><span class="n">image_encoding</span><span class="p">)</span>
         <span class="n">z1</span> <span class="o">=</span> <span class="n">p_z1_given_text</span><span class="o">.</span><span class="n">rsample</span><span class="p">()</span>
-        <span class="n">z2</span> <span class="o">=</span> <span class="n">p_z2_given_image</span><span class="o">.</span><span class="n">rsample</span><span class="p">()</span>
-        <span class="n">kl_1_2</span> <span class="o">=</span> <span class="n">p_z1_given_text</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span> <span class="o">-</span> <span class="n">p_z2_given_image</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
-        <span class="n">kl_2_1</span> <span class="o">=</span> <span class="n">p_z2_given_image</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span> <span class="o">-</span> <span class="n">p_z1_given_text</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
+        <span class="n">z2</span> <span class="o">=</span> <span class="n">p_z2_givenimage</span><span class="o">.</span><span class="n">rsample</span><span class="p">()</span>
+        <span class="n">kl_1_2</span> <span class="o">=</span> <span class="n">p_z1_given_text</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span> <span class="o">-</span> <span class="n">p_z2_givenimage</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+        <span class="n">kl_2_1</span> <span class="o">=</span> <span class="n">p_z2_givenimage</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span> <span class="o">-</span> <span class="n">p_z1_given_text</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
         <span class="n">skl</span> <span class="o">=</span> <span class="p">(</span><span class="n">kl_1_2</span> <span class="o">+</span> <span class="n">kl_2_1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
         <span class="n">skl</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">skl</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">skl</span>
