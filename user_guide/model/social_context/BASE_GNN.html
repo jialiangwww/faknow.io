@@ -4,23 +4,21 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BASE_GNN &mdash; FaKnow v1 documentation</title>
-      <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../static/css/theme.css" type="text/css" />
+  <title>GLCN &mdash; FaKnow v1 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
-    <script src="../../../static/js/html5shiv.min.js"></script>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../static/jquery.js"></script>
-        <script src="../../../static/sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../static/documentation_options.js"></script>
-        <script src="../../../static/doctools.js"></script>
-        <script src="../../../static/sphinx_highlight.js"></script>
-    <script src="../../../static/js/theme.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="BIGCN" href="BIGCN.html" />
-    <link rel="prev" title="SpotFake" href="../content_based/SpotFake.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,29 +47,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../get_started/usage_example.html">Usage Examples</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../config_intro.html">Config Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../data_intro.html">Data Module Introduction</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../model_intro.html">Model Introduction</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../model_intro.html#content-based">Content based</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../model_intro.html#social-context">Social context</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">BASE_GNN</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="BIGCN.html">BIGCN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DUDEF.html">DUDEF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="EBGCN.html">EBGCN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="EDDFN.html">EDDFN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="FANG.html">FANG</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GCNFN.html">GCNFN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="GNNCL.html">GNNCL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="TRUSTRD.html">TRUSTRD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="UPFD.html">UPFD</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../model_intro.html">Model Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../train_eval_intro.html">Trainer Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 </ul>
@@ -106,8 +85,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../model_intro.html">Model Introduction</a></li>
-      <li class="breadcrumb-item active">BASE_GNN</li>
+      <li class="breadcrumb-item active">GLCN</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/user_guide/model/social_context/BASE_GNN.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -117,8 +95,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="base-gnn">
-<h1>BASE_GNN<a class="headerlink" href="#base-gnn" title="Permalink to this heading"></a></h1>
+  <section id="glcn">
+<h1>GLCN<a class="headerlink" href="#glcn" title="Permalink to this heading"></a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://ieeexplore.ieee.org/document/8953909">[paper]</a></p>
@@ -133,7 +111,7 @@ architecture. The main advantage is that in GLCN both given labels and the estim
 provide useful <a href="#id1"><span class="problematic" id="id2">`</span></a>weakly’ supervised information to refine (or learn) the graph construction and also to facilitate the
 graph convolution operation for unknown label estimation. Experimental results on seven benchmarks demonstrate that GLCN
 significantly outperforms the state-of-the-art traditional fixed structure based graph CNNs.</p>
-<img alt="../../../images/GLCN.png" class="align-center" src="../../../images/GLCN.png" />
+<img alt="../../../_images/GLCN.png" class="align-center" src="../../../_images/GLCN.png" />
 <p>For source code, please refer to <a class="reference internal" href="../../../faknow/faknow.model.social_context.html#module-faknow.model.social_context.base_gnn"><span class="std std-ref">BASE_GNN</span></a></p>
 <p>If you want to change parameters, dataset or evaluation settings, take a look at</p>
 <ul class="simple">
@@ -148,10 +126,7 @@ significantly outperforms the state-of-the-art traditional fixed structure based
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../content_based/SpotFake.html" class="btn btn-neutral float-left" title="SpotFake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="BIGCN.html" class="btn btn-neutral float-right" title="BIGCN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

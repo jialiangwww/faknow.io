@@ -32,7 +32,9 @@ investigating social background information related to news articles, especially
 .. toctree::
    :maxdepth: 1
 
-   model/social_context/BASE_GNN
+   model/social_context/GCN
+   model/social_context/GraphSAGE
+   model/social_context/GAT
    model/social_context/BIGCN
    model/social_context/DUDEF
    model/social_context/EBGCN

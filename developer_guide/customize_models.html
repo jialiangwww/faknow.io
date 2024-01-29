@@ -5,18 +5,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Customize Models &mdash; FaKnow v1 documentation</title>
-      <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
-    <script src="../static/js/html5shiv.min.js"></script>
+    <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../static/jquery.js"></script>
-        <script src="../static/sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../static/documentation_options.js"></script>
-        <script src="../static/doctools.js"></script>
-        <script src="../static/sphinx_highlight.js"></script>
-    <script src="../static/js/theme.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Customize Trainers" href="customize_trainers.html" />
@@ -140,7 +140,7 @@ various parameters are initialized and member variables relevant to the model ar
 the completion of forward propagation, encompassing the reception of an input batch comprising sample data, culminating in the generation of the output from the model’s
 final layer. In this example, an embedding layer from pre-trained word vectors and a fully connected layer for text classification are defined in the init
 method. Then the input text tokens are passed through these two layers in turn to get the final output of the model in the forward method.</p>
-<a class="reference internal image-reference" href="../images/UML_class_diagram.png"><img alt="../images/UML_class_diagram.png" class="align-center" src="../images/UML_class_diagram.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../_images/UML_class_diagram.png"><img alt="../_images/UML_class_diagram.png" class="align-center" src="../_images/UML_class_diagram.png" style="width: 50%;" /></a>
 <p class="centered">
 <strong>Figure 1: UML class diagram</strong></p></section>
 <section id="implement-calculate-loss">
@@ -150,7 +150,7 @@ method. It entails invoking forward to acquire the output from the model’s fin
 based on the ground truth associated with the samples. In scenarios where the final loss entails multiple losses, the user can also
 construct a python.Dict to collectively return them. Refer to the code snippet above, the text tokens and labels are obtained from the dict
 batch data according to the corresponding key respectively, and the cross-entropy is employed as the loss function to return the final loss.</p>
-<a class="reference internal image-reference" href="../images/loss&amp;predict.png"><img alt="../images/loss%26predict.png" class="align-center" src="../images/loss%26predict.png" style="width: 70%;" /></a>
+<a class="reference internal image-reference" href="../_images/loss&amp;predict.png"><img alt="../_images/loss%26predict.png" class="align-center" src="../_images/loss%26predict.png" style="width: 70%;" /></a>
 <p class="centered">
 <strong>Figure 2: calculate loss and predict methods</strong></p></section>
 <section id="implement-predict">
