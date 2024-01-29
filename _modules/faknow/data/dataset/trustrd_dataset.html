@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.data.dataset.trustrd_dataset &mdash; FaKnow v1 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../run/multimodal.html">multimodal</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.data.html">faknow.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.evaluate.html">faknow.evaluate package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.model.html">faknow.model package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.run.html">faknow.run package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.train.html">faknow.train package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.utils.html">faknow.utils package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">faknow.data.dataset.trustrd_dataset</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>faknow.data.dataset.trustrd_dataset 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">torch_geometric.data</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+
+<span class="k">class</span> <span class="nc">_TweetNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generate node tweet graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="TrustRDDataset"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.trustrd_dataset.TrustRDDataset">[文档]</a><span class="k">class</span> <span class="nc">TrustRDDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dataset for TrustRD</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="TrustRDDataset.__init__"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.trustrd_dataset.TrustRDDataset.__init__">[文档]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">nodes_index</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span>
+                 <span class="n">tree_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
+                 <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">lower</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">upper</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
+                 <span class="n">drop_rate</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            nodes_index(List): node index list.</span>
+<span class="sd">            tree_dict(Dict): dictionary of graph.</span>
+<span class="sd">            data_path(str): the path of data doc, where each sample is a graph</span>
+<span class="sd">                with node features,  edge indices, the label and the root</span>
+<span class="sd">                saved in npz file.</span>
+<span class="sd">            lower(int): the minimum of graph size. default=2.</span>
+<span class="sd">            upper(int): the maximum of graph size. default=100000.</span>
+<span class="sd">            drop_rate(float): the dropout rate of edge. default=0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">filter</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">id_</span><span class="p">:</span> <span class="n">id_</span> <span class="ow">in</span> <span class="n">tree_dict</span> <span class="ow">and</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree_dict</span><span class="p">[</span><span class="n">id_</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">,</span> <span class="n">nodes_index</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">treeDic</span> <span class="o">=</span> <span class="n">tree_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_path</span> <span class="o">=</span> <span class="n">data_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop_rate</span> <span class="o">=</span> <span class="n">drop_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_rate</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># learnable parameter for masking nodes</span></div>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes_index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">id_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes_index</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_path</span><span class="p">,</span> <span class="n">id_</span> <span class="o">+</span> <span class="s2">&quot;.npz&quot;</span><span class="p">),</span>
+                       <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">edge_index</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;edge_index&#39;</span><span class="p">]</span>
+
+        <span class="c1"># construct graph</span>
+        <span class="n">tree</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">treeDic</span><span class="p">[</span><span class="n">id_</span><span class="p">]</span>
+        <span class="n">index2node</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">_TweetNode</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">index2node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+            <span class="n">indexC</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="n">indexP</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span>
+            <span class="n">nodeC</span> <span class="o">=</span> <span class="n">index2node</span><span class="p">[</span><span class="n">indexC</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">indexP</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+                <span class="n">nodeP</span> <span class="o">=</span> <span class="n">index2node</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">indexP</span><span class="p">)]</span>
+                <span class="n">nodeC</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nodeP</span>
+                <span class="n">nodeP</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodeC</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">root_index</span> <span class="o">=</span> <span class="n">indexC</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># todo drop edge</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">index2node</span><span class="p">))]</span>
+        <span class="n">root_node</span> <span class="o">=</span> <span class="n">index2node</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">root_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">que</span> <span class="o">=</span> <span class="n">root_node</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">que</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">que</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_rate</span><span class="p">:</span>
+                <span class="n">mask</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="n">idx</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">cur</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+                    <span class="n">que</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">root_index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">return</span> <span class="n">Data</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+                    <span class="n">mask</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bool</span><span class="p">),</span>
+                    <span class="n">edge_index</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">edge_index</span><span class="p">),</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])]),</span>
+                    <span class="n">root</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]),</span>
+                    <span class="n">rootindex</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;root_index&#39;</span><span class="p">])]))</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, jialiangwww.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

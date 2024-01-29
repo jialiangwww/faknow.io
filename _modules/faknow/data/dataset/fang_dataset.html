@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.data.dataset.fang_dataset &mdash; FaKnow v1 文档</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../../_static/translations.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../../../genindex.html" />
+    <link rel="search" title="搜索" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/train_eval_intro.html">Training &amp; Evaluation Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../run/multimodal.html">multimodal</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.data.html">faknow.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.evaluate.html">faknow.evaluate package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.model.html">faknow.model package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.run.html">faknow.run package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.train.html">faknow.train package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faknow/faknow.utils.html">faknow.utils package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">模块代码</a></li>
+      <li class="breadcrumb-item active">faknow.data.dataset.fang_dataset</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>faknow.data.dataset.fang_dataset 源代码</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="n">NAME_WEIGHT_DELIMITER</span> <span class="o">=</span> <span class="s2">&quot;#&quot;</span>
+<span class="n">STANCE_DELIMITER</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span>
+<span class="n">USER_TAG</span><span class="p">,</span> <span class="n">NEWS_TAG</span><span class="p">,</span> <span class="n">SOURCE_TAG</span><span class="p">,</span> <span class="n">COMMUNITY_TAG</span> <span class="o">=</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;news&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;community&quot;</span>
+
+
+<div class="viewcode-block" id="encode_class_idx_label"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.encode_class_idx_label">[文档]</a><span class="k">def</span> <span class="nf">encode_class_idx_label</span><span class="p">(</span><span class="n">label_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; encode label to one_hot embedding&quot;&quot;&quot;</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">label_map</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span>
+    <span class="n">class2idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">)}</span>
+    <span class="n">labels_onehot_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">class2idx</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">label_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="k">return</span> <span class="n">labels_onehot_map</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">class2idx</span></div>
+
+
+<div class="viewcode-block" id="row_normalize"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.row_normalize">[文档]</a><span class="k">def</span> <span class="nf">row_normalize</span><span class="p">(</span><span class="n">mtx</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Row-normalize sparse matrix&quot;&quot;&quot;</span>
+    <span class="n">row_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mtx</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">sum_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">row_sum</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">sum_inv</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">sum_inv</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">row_mtx_inv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">sum_inv</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">row_mtx_inv</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mtx</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="is_tag"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.is_tag">[文档]</a><span class="k">def</span> <span class="nf">is_tag</span><span class="p">(</span><span class="n">entity_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; find whether the entity is tagged.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">entity</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">entity_type</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="read_csv"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.read_csv">[文档]</a><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">load_header</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">):</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="n">delimiter</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">load_header</span><span class="p">:</span>
+            <span class="p">[</span><span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="p">[</span><span class="n">content</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csv_reader</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">content</span></div>
+
+
+<div class="viewcode-block" id="load_text_as_list"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.load_text_as_list">[文档]</a><span class="k">def</span> <span class="nf">load_text_as_list</span><span class="p">(</span><span class="n">input_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="load_json"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.load_json">[文档]</a><span class="k">def</span> <span class="nf">load_json</span><span class="p">(</span><span class="n">input_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FangDataset"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset">[文档]</a><span class="k">class</span> <span class="nc">FangDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    construct global graph from tsv, txt and csv</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FangDataset.__init__"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset.__init__">[文档]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_path</span> <span class="o">=</span> <span class="n">root_path</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">adj_lists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stance_lists</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">),</span> <span class="p">[],</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_data</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_stances</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">news_labels</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_news_labels</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_engage_users</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_engage_stances</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_engage_ts</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_masked_attn</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engaged_source</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engaged_news</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class2idx</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">news_label_map</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_idxs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev_idxs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_idxs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">news</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="nb">set</span><span class="p">(),</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="FangDataset.preprocess_news_classification_data"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset.preprocess_news_classification_data">[文档]</a>    <span class="k">def</span> <span class="nf">preprocess_news_classification_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                            <span class="n">news_nodes</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+                                            <span class="n">n_stances</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                            <span class="n">adj_lists</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                                            <span class="n">stance_lists</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                                            <span class="n">news_labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            nodes_batch(set): the idx list of node to be processed.</span>
+<span class="sd">            n_stances(int): stance num.</span>
+<span class="sd">            adj_lists(dict): adjacent information dict for every node.</span>
+<span class="sd">            stance_lists(dict): stance information dict for every node.</span>
+<span class="sd">            news_labels(dict): news label dict.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">smoothing_coeff</span> <span class="o">=</span> <span class="mf">1e-8</span>  <span class="c1"># to differentiate between 0 ts and padding value</span>
+        <span class="n">max_duration</span> <span class="o">=</span> <span class="mi">86400</span> <span class="o">*</span> <span class="mi">7</span>
+        <span class="n">engaged_sources</span><span class="p">,</span> <span class="n">engaged_news</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">[]</span>
+        <span class="n">all_engage_users</span><span class="p">,</span> <span class="n">all_engage_stances</span><span class="p">,</span> <span class="n">all_engage_ts</span><span class="p">,</span> <span class="n">all_masked_attn</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">news_nodes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">news_labels</span><span class="p">:</span>
+                <span class="n">engaged_news</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="n">_sources</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">adj_lists</span><span class="p">[</span><span class="n">node</span><span class="p">]]</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sources</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;only 1 source can publish the article&quot;</span>
+                <span class="n">engaged_sources</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">_sources</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">engage_users</span><span class="p">,</span> <span class="n">engage_stances</span><span class="p">,</span> <span class="n">engage_ts</span><span class="p">,</span> <span class="n">masked_attn</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">user</span><span class="p">,</span> <span class="p">(</span><span class="n">stance</span><span class="p">,</span> <span class="n">ts_mean</span><span class="p">,</span> <span class="n">ts_std</span><span class="p">)</span> <span class="ow">in</span> <span class="n">stance_lists</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                    <span class="n">ts_mean</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ts_mean</span><span class="p">,</span> <span class="n">max_duration</span><span class="p">)</span>
+                    <span class="n">scaled_ts_mean</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ts_mean</span><span class="p">,</span> <span class="n">max_duration</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">max_duration</span><span class="p">)</span>
+                    <span class="k">assert</span> <span class="n">scaled_ts_mean</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+                    <span class="n">engage_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+                    <span class="n">engage_stances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stance</span><span class="p">)</span>
+                    <span class="n">engage_ts</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">scaled_ts_mean</span> <span class="o">+</span> <span class="n">smoothing_coeff</span><span class="p">,</span> <span class="n">ts_std</span> <span class="o">+</span> <span class="n">smoothing_coeff</span><span class="p">])</span>
+                    <span class="n">masked_attn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">engage_users</span><span class="p">,</span> <span class="n">engage_stances</span><span class="p">,</span> <span class="n">engage_ts</span><span class="p">,</span> <span class="n">masked_attn</span> <span class="o">=</span> \
+                    <span class="n">engage_users</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">engage_stances</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">engage_ts</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> \
+                        <span class="n">masked_attn</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">engage_stances</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                    <span class="n">engage_stances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_stances</span><span class="p">)))</span>
+                    <span class="n">engage_ts</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+                    <span class="n">masked_attn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">)</span>
+                <span class="n">all_engage_users</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">engage_users</span>
+                <span class="n">all_engage_stances</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">engage_stances</span>
+                <span class="n">all_engage_ts</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">engage_ts</span>
+                <span class="n">all_masked_attn</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">masked_attn</span>
+                <span class="n">labels</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">news_labels</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">engaged_news</span><span class="p">,</span> <span class="n">engaged_sources</span><span class="p">,</span> <span class="n">all_engage_users</span><span class="p">,</span> <span class="n">all_engage_stances</span><span class="p">,</span> <span class="n">all_engage_ts</span><span class="p">,</span> <span class="n">all_masked_attn</span><span class="p">,</span> <span class="n">labels</span></div>
+
+<div class="viewcode-block" id="FangDataset.load_and_update_adj_lists"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset.load_and_update_adj_lists">[文档]</a>    <span class="k">def</span> <span class="nf">load_and_update_adj_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        construct adjacent_list from edge information doc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">edge_csv_content</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">edge_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">edge_csv_content</span><span class="p">:</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="mf">1.</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">node_src</span><span class="p">,</span> <span class="n">node_dest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_lists</span><span class="p">[</span><span class="n">node_src</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node_dest</span><span class="p">)</span> <span class="o">+</span> <span class="n">NAME_WEIGHT_DELIMITER</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weight</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adj_lists</span><span class="p">[</span><span class="n">node_dest</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node_src</span><span class="p">)</span> <span class="o">+</span> <span class="n">NAME_WEIGHT_DELIMITER</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">weight</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node_src</span><span class="p">,</span> <span class="n">node_dest</span><span class="p">,</span> <span class="n">weight</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="FangDataset.load_stance_map"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset.load_stance_map">[文档]</a>    <span class="k">def</span> <span class="nf">load_stance_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stance_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get stance feature from stance information doc</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">stance_content</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">stance_file</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">stance_map</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">stance_content</span><span class="p">:</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="mf">1.</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">ts_mean</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">ts_std</span> <span class="o">=</span> <span class="mf">0.</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">user</span><span class="p">,</span> <span class="n">news</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="n">stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">user</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">ts_mean</span><span class="p">,</span> <span class="n">ts_std</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">news</span><span class="p">,</span> <span class="n">engagements</span> <span class="ow">in</span> <span class="n">stance_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">engagements</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">stance_map</span></div>
+
+<div class="viewcode-block" id="FangDataset.get_news_label_map"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset.get_news_label_map">[文档]</a>    <span class="k">def</span> <span class="nf">get_news_label_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">news_info_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">news_info_data</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">news_info_path</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">news_label_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">news_info_data</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">news_label_map</span></div>
+
+<div class="viewcode-block" id="FangDataset.get_train_val_test_labels_nodes"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset.get_train_val_test_labels_nodes">[文档]</a>    <span class="k">def</span> <span class="nf">get_train_val_test_labels_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">news_label_map</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">idx_train</span><span class="p">,</span> <span class="n">idx_val</span><span class="p">,</span> <span class="n">idx_test</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">train_test_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;train_test.json&quot;</span><span class="p">)</span>
+        <span class="n">train_test_val</span> <span class="o">=</span> <span class="n">load_json</span><span class="p">(</span><span class="n">train_test_path</span><span class="p">)</span>
+        <span class="n">train_news</span><span class="p">,</span> <span class="n">val_news</span><span class="p">,</span> <span class="n">test_news</span> <span class="o">=</span> <span class="n">train_test_val</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">],</span> <span class="n">train_test_val</span><span class="p">[</span><span class="s2">&quot;val&quot;</span><span class="p">],</span> <span class="n">train_test_val</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">entities</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">news_label_map</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">train_news</span><span class="p">:</span>
+                    <span class="n">idx_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">val_news</span><span class="p">:</span>
+                    <span class="n">idx_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">test_news</span><span class="p">:</span>
+                    <span class="n">idx_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">idx_train</span><span class="p">,</span> <span class="n">idx_val</span><span class="p">,</span> <span class="n">idx_test</span></div>
+
+<div class="viewcode-block" id="FangDataset.load"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset.load">[文档]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        load all doc from root path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">entity_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;entities.txt&quot;</span><span class="p">)</span>
+        <span class="n">entity_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;entity_features.tsv&quot;</span><span class="p">)</span>
+        <span class="n">source_citation_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;source_citation.tsv&quot;</span><span class="p">)</span>
+        <span class="n">source_publication_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;source_publication.tsv&quot;</span><span class="p">)</span>
+        <span class="n">user_relationship_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;user_relationships.tsv&quot;</span><span class="p">)</span>
+        <span class="n">news_info_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;news_info.tsv&quot;</span><span class="p">)</span>
+
+        <span class="n">report_stance_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;report.tsv&quot;</span><span class="p">)</span>
+        <span class="n">support_neutral_stance_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;support_neutral.tsv&quot;</span><span class="p">)</span>
+        <span class="n">support_negative_stance_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;support_negative.tsv&quot;</span><span class="p">)</span>
+        <span class="n">deny_stance_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s2">&quot;deny.tsv&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="n">load_text_as_list</span><span class="p">(</span><span class="n">entity_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">news_label_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_news_label_map</span><span class="p">(</span><span class="n">news_info_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_idxs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev_idxs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_idxs</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_train_val_test_labels_nodes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">news_label_map</span><span class="p">)</span>
+
+        <span class="n">node_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">node_names</span><span class="p">)}</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">:</span>
+            <span class="n">e_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span><span class="p">[</span><span class="n">e</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">is_tag</span><span class="p">(</span><span class="n">NEWS_TAG</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">news</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">e_idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">is_tag</span><span class="p">(</span><span class="n">USER_TAG</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">e_idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">is_tag</span><span class="p">(</span><span class="n">SOURCE_TAG</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">e_idx</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">news_label_map</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">node_name_idx_map</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">news_label_map</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">news_labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_news_labels</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">class2idx</span> <span class="o">=</span> <span class="n">encode_class_idx_label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">news_label_map</span><span class="p">)</span>
+
+        <span class="n">feature_content</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">entity_feature_path</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">feature_data</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">feature_content</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_data</span> <span class="o">=</span> <span class="n">row_normalize</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">feature_data</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_and_update_adj_lists</span><span class="p">(</span><span class="n">source_citation_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_and_update_adj_lists</span><span class="p">(</span><span class="n">source_publication_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_and_update_adj_lists</span><span class="p">(</span><span class="n">user_relationship_path</span><span class="p">)</span>
+
+        <span class="n">all_stance_map</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_stance_map</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_stance_map</span><span class="p">(</span><span class="n">deny_stance_path</span><span class="p">))</span>
+        <span class="n">all_stance_map</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_stance_map</span><span class="p">(</span><span class="n">report_stance_path</span><span class="p">))</span>
+        <span class="n">all_stance_map</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_stance_map</span><span class="p">(</span><span class="n">support_neutral_stance_path</span><span class="p">))</span>
+        <span class="n">all_stance_map</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">load_stance_map</span><span class="p">(</span><span class="n">support_negative_stance_path</span><span class="p">))</span>
+        <span class="n">all_engaged_news</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_stances</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_stance_map</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">stance_map</span> <span class="ow">in</span> <span class="n">all_stance_map</span><span class="p">:</span>
+            <span class="n">all_engaged_news</span> <span class="o">|=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stance_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">news_user_stance_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">news</span> <span class="ow">in</span> <span class="n">all_engaged_news</span><span class="p">:</span>
+            <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">stance_map</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">all_stance_map</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">news</span> <span class="ow">in</span> <span class="n">stance_map</span><span class="p">:</span>
+                    <span class="n">engaging_users</span> <span class="o">=</span> <span class="n">stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">user</span><span class="p">,</span> <span class="n">num_stances</span><span class="p">,</span> <span class="n">ts_mean</span><span class="p">,</span> <span class="n">ts_std</span> <span class="ow">in</span> <span class="n">engaging_users</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">user</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">]:</span>
+                            <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">][</span><span class="n">user</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_stances</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+                        <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">][</span><span class="n">user</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num_stances</span>
+                        <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">][</span><span class="n">user</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts_mean</span>
+                        <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">][</span><span class="n">user</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts_std</span>
+
+        <span class="k">for</span> <span class="n">news</span> <span class="ow">in</span> <span class="n">news_user_stance_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stance_lists</span><span class="p">[</span><span class="n">news</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">user</span><span class="p">,</span> <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">][</span><span class="n">user</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">stance_lists</span><span class="p">[</span><span class="n">user</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">news</span><span class="p">,</span> <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">][</span><span class="n">user</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">user</span><span class="p">,</span> <span class="n">news</span><span class="p">,</span> <span class="n">news_user_stance_map</span><span class="p">[</span><span class="n">news</span><span class="p">][</span><span class="n">user</span><span class="p">]))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">engaged_news</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engaged_source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_engage_users</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_engage_stances</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_engage_ts</span><span class="p">,</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_masked_attn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_news_classification_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">news</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_stances</span><span class="p">,</span>
+                                                                                         <span class="bp">self</span><span class="o">.</span><span class="n">adj_lists</span><span class="p">,</span>
+                                                                                         <span class="bp">self</span><span class="o">.</span><span class="n">stance_lists</span><span class="p">,</span>
+                                                                                         <span class="bp">self</span><span class="o">.</span><span class="n">news_labels</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="FangEvaluateDataSet"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangEvaluateDataSet">[文档]</a><span class="k">class</span> <span class="nc">FangEvaluateDataSet</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    DataSet used for validate and test</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FangEvaluateDataSet.__init__"><a class="viewcode-back" href="../../../../faknow/faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangEvaluateDataSet.__init__">[文档]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_batch</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_batch</span> <span class="o">=</span> <span class="n">data_batch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span></div>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_batch</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_batch</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">[</span><span class="n">idx</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">item</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, jialiangwww.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

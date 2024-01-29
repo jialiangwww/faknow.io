@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.model.social_context &mdash; FaKnow v1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="faknow.run" href="faknow.run.html" />
+    <link rel="prev" title="faknow.model.layers" href="faknow.model.layers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/train_eval_intro.html">Trainer Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_datasets.html">Customize DataSets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_evaluator.html">Customize Evaluator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="faknow.model.html">faknow.model</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.html">faknow.model.content_based</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.layers.html">faknow.model.layers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">faknow.model.social_context</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.base_gnn">faknow.model.social_context.base_gnn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.base_gnn.GAT"><code class="docutils literal notranslate"><span class="pre">GAT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.base_gnn.GCN"><code class="docutils literal notranslate"><span class="pre">GCN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.base_gnn.SAGE"><code class="docutils literal notranslate"><span class="pre">SAGE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.bigcn">faknow.model.social_context.bigcn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.bigcn.BiGCN"><code class="docutils literal notranslate"><span class="pre">BiGCN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.dudef">faknow.model.social_context.dudef</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.dudef.DUDEF"><code class="docutils literal notranslate"><span class="pre">DUDEF</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.ebgcn">faknow.model.social_context.ebgcn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.ebgcn.EBGCN"><code class="docutils literal notranslate"><span class="pre">EBGCN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.eddfn">faknow.model.social_context.eddfn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.eddfn.EDDFN"><code class="docutils literal notranslate"><span class="pre">EDDFN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.fang">faknow.model.social_context.fang</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.fang.FANG"><code class="docutils literal notranslate"><span class="pre">FANG</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.gcnfn">faknow.model.social_context.gcnfn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.gcnfn.GCNFN"><code class="docutils literal notranslate"><span class="pre">GCNFN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.gnncl">faknow.model.social_context.gnncl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.gnncl.GNNCL"><code class="docutils literal notranslate"><span class="pre">GNNCL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.trustrd">faknow.model.social_context.trustrd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.trustrd.TrustRD"><code class="docutils literal notranslate"><span class="pre">TrustRD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel"><code class="docutils literal notranslate"><span class="pre">TrustRDPreTrainModel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.trustrd.calculate_ib_loss"><code class="docutils literal notranslate"><span class="pre">calculate_ib_loss()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.social_context.upfd">faknow.model.social_context.upfd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.upfd.UPFDGAT"><code class="docutils literal notranslate"><span class="pre">UPFDGAT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.upfd.UPFDGCN"><code class="docutils literal notranslate"><span class="pre">UPFDGCN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.upfd.UPFDGCNFN"><code class="docutils literal notranslate"><span class="pre">UPFDGCNFN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.social_context.upfd.UPFDSAGE"><code class="docutils literal notranslate"><span class="pre">UPFDSAGE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.html#module-faknow.model.model">faknow.model.model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="faknow.model.html">faknow.model</a></li>
+      <li class="breadcrumb-item active">faknow.model.social_context</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/faknow/faknow.model.social_context.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="faknow-model-social-context">
+<h1>faknow.model.social_context<a class="headerlink" href="#faknow-model-social-context" title="Permalink to this heading"></a></h1>
+<section id="module-faknow.model.social_context.base_gnn">
+<span id="faknow-model-social-context-base-gnn"></span><h2>faknow.model.social_context.base_gnn<a class="headerlink" href="#module-faknow.model.social_context.base_gnn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.GAT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.base_gnn.</span></span><span class="sig-name descname"><span class="pre">GAT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/base_gnn.html#GAT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.base_gnn.GAT" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGNN</span></code></p>
+<p>Graph Attention Networks, ICLR 2018
+paper: <a class="reference external" href="https://openreview.net/forum?id=rJXMpikCZ">https://openreview.net/forum?id=rJXMpikCZ</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.GAT.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/base_gnn.html#GAT.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.base_gnn.GAT.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – Default=128</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.GAT.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.base_gnn.GAT.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.GCN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.base_gnn.</span></span><span class="sig-name descname"><span class="pre">GCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/base_gnn.html#GCN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.base_gnn.GCN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGNN</span></code></p>
+<p>Semi-Supervised Classification with Graph Convolutional Networks, ICLR 2017
+paper: <a class="reference external" href="https://openreview.net/forum?id=SJU4ayYgl">https://openreview.net/forum?id=SJU4ayYgl</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.GCN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/base_gnn.html#GCN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.base_gnn.GCN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – Default=128</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.GCN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.base_gnn.GCN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.SAGE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.base_gnn.</span></span><span class="sig-name descname"><span class="pre">SAGE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/base_gnn.html#SAGE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.base_gnn.SAGE" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGNN</span></code></p>
+<p>Inductive Representation Learning on Large Graphs, NeurIPS 2017
+paper: <a class="reference external" href="https://dl.acm.org/doi/10.5555/3294771.3294869">https://dl.acm.org/doi/10.5555/3294771.3294869</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.SAGE.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/base_gnn.html#SAGE.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.base_gnn.SAGE.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – Default=128</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.base_gnn.SAGE.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.base_gnn.SAGE.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.bigcn">
+<span id="faknow-model-social-context-bigcn"></span><h2>faknow.model.social_context.bigcn<a class="headerlink" href="#module-faknow.model.social_context.bigcn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.bigcn.BiGCN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.bigcn.</span></span><span class="sig-name descname"><span class="pre">BiGCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/bigcn.html#BiGCN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.bigcn.BiGCN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Rumor Detection on Social Media with Bi-Directional Graph Convolutional Networks, AAAI 2020
+paper: <a class="reference external" href="https://ojs.aaai.org/index.php/AAAI/article/view/5393">https://ojs.aaai.org/index.php/AAAI/article/view/5393</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.bigcn.BiGCN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/bigcn.html#BiGCN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.bigcn.BiGCN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer. Default=128</p></li>
+<li><p><strong>out_size</strong> (<em>int</em>) – dimension of output layer. Default=128</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.bigcn.BiGCN.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/bigcn.html#BiGCN.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.bigcn.BiGCN.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss via CrossEntropyLoss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Batch</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.bigcn.BiGCN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bu_edge_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/bigcn.html#BiGCN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.bigcn.BiGCN.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>) – node feature, shape=(num_nodes, feature_size), shape=(num_nodes, feature_size)</p></li>
+<li><p><strong>edge_index</strong> (<em>Tensor</em>) – top-down edge index, shape=(2, num_edges)</p></li>
+<li><p><strong>bu_edge_index</strong> (<em>Tensor</em>) – bottom-up edge index, shape=(2, num_edges)</p></li>
+<li><p><strong>batch</strong> (<em>Tensor</em>) – index of graph each node belongs to, shape=(num_nodes,)</p></li>
+<li><p><strong>root_index</strong> (<em>Tensor</em>) – index of root node for each graph, shape=(num_graphs,)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>prediction of being fake, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.bigcn.BiGCN.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/bigcn.html#BiGCN.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.bigcn.BiGCN.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Batch</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>softmax probability, shape=(num_graphs, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.bigcn.BiGCN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.bigcn.BiGCN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.dudef">
+<span id="faknow-model-social-context-dudef"></span><h2>faknow.model.social_context.dudef<a class="headerlink" href="#module-faknow.model.social_context.dudef" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.dudef.DUDEF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.dudef.</span></span><span class="sig-name descname"><span class="pre">DUDEF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotion_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/dudef.html#DUDEF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.dudef.DUDEF" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>DUDEF: Mining Dual Emotion for Fake News Detection, WWW 2021
+paper: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3442381.3450004">https://dl.acm.org/doi/10.1145/3442381.3450004</a>
+code: <a class="reference external" href="https://github.com/RMSnow/WWW2021">https://github.com/RMSnow/WWW2021</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.dudef.DUDEF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotion_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/dudef.html#DUDEF.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.dudef.DUDEF.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>emotion_len</strong> (<em>int</em>) – dimension of dual_emotion</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer</p></li>
+<li><p><strong>embedding_matrix</strong> (<em>Tensor</em>) – word embedding matrix</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.dudef.DUDEF.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/dudef.html#DUDEF.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.dudef.DUDEF.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss via CrossEntropyLoss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Tensor</em><em>]</em>) – batch data, shape=(2,batch_size,feature_size)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.dudef.DUDEF.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semantics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/dudef.html#DUDEF.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.dudef.DUDEF.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>semantics</strong> (<em>Tensor</em>) – node semantics features, shape=(batch_size, feature_size)</p></li>
+<li><p><strong>emotions</strong> (<em>Tensor</em>) – node emotions features, shape=(batch_size, feature_size)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>prediction of being fake, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.dudef.DUDEF.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/dudef.html#DUDEF.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.dudef.DUDEF.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Batch</em>) – batch data, shape=(2,batch_size,feature_size)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>softmax probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.dudef.DUDEF.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.dudef.DUDEF.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.ebgcn">
+<span id="faknow-model-social-context-ebgcn"></span><h2>faknow.model.social_context.ebgcn<a class="headerlink" href="#module-faknow.model.social_context.ebgcn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.ebgcn.EBGCN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.ebgcn.</span></span><span class="sig-name descname"><span class="pre">EBGCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/ebgcn.html#EBGCN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.ebgcn.EBGCN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Towards Propagation Uncertainty: Edge-enhanced Bayesian Graph Convolutional Networks for Rumor Detection, ACL 2021
+paper: <a class="reference external" href="https://aclanthology.org/2021.acl-long.297/">https://aclanthology.org/2021.acl-long.297/</a>
+code: <a class="reference external" href="https://github.com/weilingwei96/EBGCN">https://github.com/weilingwei96/EBGCN</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.ebgcn.EBGCN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/ebgcn.html#EBGCN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.ebgcn.EBGCN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_size</strong> (<em>int</em>) – the feature size of input. default=5000.</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – the feature size of hidden embedding. default=64.</p></li>
+<li><p><strong>output_size</strong> (<em>int</em>) – the feature size of output embedding. default=64.</p></li>
+<li><p><strong>edge_num</strong> (<em>int</em>) – the num of edge type. default=2.</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – dropout rate. default=0.5.</p></li>
+<li><p><strong>num_class</strong> (<em>int</em>) – the num of output type. default=4</p></li>
+<li><p><strong>edge_loss_weight</strong> (<em>float</em>) – the weight of edge loss. default=0.2.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.ebgcn.EBGCN.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/ebgcn.html#EBGCN.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.ebgcn.EBGCN.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss for EBGCN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Batch</em>) – pyg batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss dict with key ‘total_loss’, ‘pred_loss’, ‘edge_loss’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.ebgcn.EBGCN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">td_edge_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bu_edge_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/ebgcn.html#EBGCN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.ebgcn.EBGCN.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_features</strong> (<em>Tensor</em>) – feature of node in claims.</p></li>
+<li><p><strong>td_edge_index</strong> (<em>Tensor</em>) – directed adjacent martix in COO format
+from top to bottom.</p></li>
+<li><p><strong>bu_edge_index</strong> (<em>Tensor</em>) – directed adjacent martix in COO format
+from bottom to top.</p></li>
+<li><p><strong>root_index</strong> (<em>Tensor</em>) – index of root news in claims.</p></li>
+<li><p><strong>batch</strong> (<em>Tensor</em>) – vector mapping each node to its respective graph.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>predict output.
+td_edge_loss(Tensor): edge loss of graph with direction from top to bottom.
+bu_edge_loss(Tensor): edge loss of graph with direction from bottom to top.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>output(Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.ebgcn.EBGCN.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/ebgcn.html#EBGCN.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.ebgcn.EBGCN.predict" title="Permalink to this definition"></a></dt>
+<dd><blockquote>
+<div><p>predict the probability of being fake news</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Batch</em>) – pyg batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>softmax probability, shape=(batch_size, num_classes)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.ebgcn.EBGCN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.ebgcn.EBGCN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.eddfn">
+<span id="faknow-model-social-context-eddfn"></span><h2>faknow.model.social_context.eddfn<a class="headerlink" href="#module-faknow.model.social_context.eddfn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.eddfn.EDDFN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.eddfn.</span></span><span class="sig-name descname"><span class="pre">EDDFN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">512</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/eddfn.html#EDDFN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.eddfn.EDDFN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Embracing Domain Differences in Fake News Cross-domain Fake News Detection using Multi-modal Data, AAAI 2021
+paper: <a class="reference external" href="https://ojs.aaai.org/index.php/AAAI/article/view/16134">https://ojs.aaai.org/index.php/AAAI/article/view/16134</a>
+code: <a class="reference external" href="https://github.com/amilasilva92/cross-domain-fake-news-detection-aaai2021">https://github.com/amilasilva92/cross-domain-fake-news-detection-aaai2021</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.eddfn.EDDFN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">512</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/eddfn.html#EDDFN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.eddfn.EDDFN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_size</strong> (<em>int</em>) – dimension of input representation</p></li>
+<li><p><strong>domain_size</strong> (<em>int</em>) – dimension of domain vector</p></li>
+<li><p><strong>lambda1</strong> (<em>float</em>) – L_{recon} loss weight. Default=1.0</p></li>
+<li><p><strong>lambda2</strong> (<em>float</em>) – L_{specific} loss weight. Default=10.0</p></li>
+<li><p><strong>lambda3</strong> (<em>float</em>) – L_{shared} loss weight. Default=5.0</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – size of hidden layer. Default=512</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.eddfn.EDDFN.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/eddfn.html#EDDFN.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.eddfn.EDDFN.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate total loss,
+including classification loss(BCELoss), reconstruction loss(MSELoss),
+specific domain loss(MSELoss) and shared domain loss(MSELoss)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Tuple</em><em>[</em><em>Tensor</em><em>]</em>) – batch data tuple, including input, domain and label</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss dict, key: total_loss, class_loss, decoder_loss, specific_domain_loss, shared_domain_loss</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.eddfn.EDDFN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_representation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/eddfn.html#EDDFN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.eddfn.EDDFN.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_representation</strong> (<em>Tensor</em>) – input representation consisting of text and propagation network</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>class_out (Tensor): prediction of being fake news, shape=(batch_size, 1)
+decoder_out (Tensor): prediction of input, shape=(batch_size, input_size)
+specific_domain (Tensor): specific domain output, shape=(batch_size, domain_size)
+shared_domain (Tensor): shared domain output, shape=(batch_size, domain_size)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.eddfn.EDDFN.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/eddfn.html#EDDFN.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.eddfn.EDDFN.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Tuple</em><em>[</em><em>Tensor</em><em>]</em>) – batch data tuple, including input, domain</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>one hot probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.eddfn.EDDFN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.eddfn.EDDFN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.fang">
+<span id="faknow-model-social-context-fang"></span><h2>faknow.model.social_context.fang<a class="headerlink" href="#module-faknow.model.social_context.fang" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.fang.</span></span><span class="sig-name descname"><span class="pre">FANG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fang_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset" title="faknow.data.dataset.fang_dataset.FangDataset"><span class="pre">FangDataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_stance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_stance_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>FANG: Leveraging Social Context for Fake News Detection Using Graph Representation, CIKM 2020
+paper: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3340531.3412046">https://dl.acm.org/doi/10.1145/3340531.3412046</a>
+code: <a class="reference external" href="https://github.com/nguyenvanhoang7398/FANG">https://github.com/nguyenvanhoang7398/FANG</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fang_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset" title="faknow.data.dataset.fang_dataset.FangDataset"><span class="pre">FangDataset</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_stance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_stance_hidden</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fang_data</strong> (<a class="reference internal" href="faknow.data.dataset.html#faknow.data.dataset.fang_dataset.FangDataset" title="faknow.data.dataset.fang_dataset.FangDataset"><em>FangDataset</em></a>) – global graph information.</p></li>
+<li><p><strong>input_size</strong> (<em>int</em>) – raw features’ embedding size. default=100.</p></li>
+<li><p><strong>embedding_size</strong> (<em>int</em>) – embedding size of fang and the output size of graphsage. default=16.</p></li>
+<li><p><strong>num_stance</strong> (<em>int</em>) – the total num of stance. default=4.</p></li>
+<li><p><strong>num_stance_hidden</strong> (<em>int</em>) – the feature size of stance(usually num_stance_hidden * num_stance = embedding_size). default=4.</p></li>
+<li><p><strong>timestamp_size</strong> (<em>int</em>) – the feature size of timestamp. default=2.</p></li>
+<li><p><strong>num_classes</strong> (<em>int</em>) – label num. default=2.</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – dropout rate. default=0.1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate total loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>torch.Tensor</em>) – nodes’ idx list</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>news_loss + stance_loss + unsup_loss</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.extract_most_attended_users">
+<span class="sig-name descname"><span class="pre">extract_most_attended_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">news_attn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engage_users</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.extract_most_attended_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.extract_most_attended_users" title="Permalink to this definition"></a></dt>
+<dd><p>using attention to search the most attended user to compute unsupvised loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>news_attn</strong> (<em>torch.Tensor</em>) – users’ attention for news.</p></li>
+<li><p><strong>engage_users</strong> (<em>list</em>) – all engaged users.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.fetch_news_user_stance">
+<span class="sig-name descname"><span class="pre">fetch_news_user_stance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">news_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stance_lists</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.fetch_news_user_stance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.fetch_news_user_stance" title="Permalink to this definition"></a></dt>
+<dd><p>fetch data required for stance prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>news_nodes</strong> (<em>list</em>) – list of news node.</p></li>
+<li><p><strong>stance_lists</strong> (<em>dict</em>) – stance information dict for every node.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_batch</strong> (<em>list</em>) – node’s idx list.</p></li>
+<li><p><strong>test</strong> (<em>bool</em>) – test or train. default=False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.get_neigh_weights">
+<span class="sig-name descname"><span class="pre">get_neigh_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.get_neigh_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.get_neigh_weights" title="Permalink to this definition"></a></dt>
+<dd><p>get node’s neighbor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> (<em>int</em>) – node idx.</p></li>
+<li><p><strong>node_only</strong> (<em>bool</em>) – whether to get only node or both node and its edge information. default=False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.get_proximity_samples">
+<span class="sig-name descname"><span class="pre">get_proximity_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_walk_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.get_proximity_samples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.get_proximity_samples" title="Permalink to this definition"></a></dt>
+<dd><p>positive samping and negative sampling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes</strong> (<em>list</em>) – node idx list.</p></li>
+<li><p><strong>num_pos</strong> (<em>int</em>) – positive sampling num.</p></li>
+<li><p><strong>num_neg</strong> (<em>int</em>) – negative sampling num.</p></li>
+<li><p><strong>neg_walk_len</strong> (<em>int</em>) – walk step.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.infer_embedding">
+<span class="sig-name descname"><span class="pre">infer_embedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.infer_embedding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.infer_embedding" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>dict</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>predict probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.preprocess_news_classification_data">
+<span class="sig-name descname"><span class="pre">preprocess_news_classification_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/fang.html#FANG.preprocess_news_classification_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.fang.FANG.preprocess_news_classification_data" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes_batch</strong> (<em>list</em>) – the idx list of node to be processed.</p></li>
+<li><p><strong>embed_size</strong> (<em>int</em>) – the size of embedding features.</p></li>
+<li><p><strong>test</strong> (<em>bool</em>) – if test or trai</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.fang.FANG.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.fang.FANG.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.gcnfn">
+<span id="faknow-model-social-context-gcnfn"></span><h2>faknow.model.social_context.gcnfn<a class="headerlink" href="#module-faknow.model.social_context.gcnfn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.gcnfn.GCNFN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.gcnfn.</span></span><span class="sig-name descname"><span class="pre">GCNFN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/gcnfn.html#GCNFN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.gcnfn.GCNFN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGCNFN</span></code></p>
+<p>Fake news detection on social media using geometric deep learning, arXiv 2019
+paper: <a class="reference external" href="https://arxiv.org/abs/1902.06673">https://arxiv.org/abs/1902.06673</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.gcnfn.GCNFN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/gcnfn.html#GCNFN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.gcnfn.GCNFN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer. Default=128</p></li>
+<li><p><strong>dropout_ratio</strong> (<em>float</em>) – dropout ratio. Default=0.5</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.gcnfn.GCNFN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.gcnfn.GCNFN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.gnncl">
+<span id="faknow-model-social-context-gnncl"></span><h2>faknow.model.social_context.gnncl<a class="headerlink" href="#module-faknow.model.social_context.gnncl" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.gnncl.GNNCL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.gnncl.</span></span><span class="sig-name descname"><span class="pre">GNNCL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/gnncl.html#GNNCL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.gnncl.GNNCL" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Graph neural networks with continual learning for fake news detection from social media, arXiv 2020
+paper: <a class="reference external" href="https://arxiv.org/abs/2007.03316">https://arxiv.org/abs/2007.03316</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.gnncl.GNNCL.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/gnncl.html#GNNCL.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.gnncl.GNNCL.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>max_nodes</strong> (<em>int</em>) – maximum number of nodes in a graph</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.gnncl.GNNCL.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/gnncl.html#GNNCL.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.gnncl.GNNCL.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss via CrossEntropyLoss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Batch</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.gnncl.GNNCL.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/gnncl.html#GNNCL.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.gnncl.GNNCL.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Tensor</em>) – node features, shape=(batch_size, max_nodes, feature_size)</p></li>
+<li><p><strong>adj</strong> (<em>Tensor</em>) – adjacency matrix, shape=(batch_size, max_nodes, max_nodes)</p></li>
+<li><p><strong>mask</strong> (<em>Tensor</em>) – mask for adjacency matrix, shape=(batch_size, max_nodes). Default=None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output (Tensor): prediction of being fake, shape (batch_size, 2)
+l (Tensor): loss of first pooling layer
+e (Tensor): entropy of first pooling layer</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.gnncl.GNNCL.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/gnncl.html#GNNCL.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.gnncl.GNNCL.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Batch</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>softmax probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.gnncl.GNNCL.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.gnncl.GNNCL.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.trustrd">
+<span id="faknow-model-social-context-trustrd"></span><h2>faknow.model.social_context.trustrd<a class="headerlink" href="#module-faknow.model.social_context.trustrd" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRD">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.trustrd.</span></span><span class="sig-name descname"><span class="pre">TrustRD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pre_trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel" title="faknow.model.social_context.trustrd.TrustRDPreTrainModel"><span class="pre">TrustRDPreTrainModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hid_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRD" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Towards Trustworthy Rumor Detection with Interpretable Graph Structural Learning, CIKM 2023
+paper: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3583780.3615228">https://dl.acm.org/doi/10.1145/3583780.3615228</a>
+code: <a class="reference external" href="https://github.com/Anonymous4ScienceAuthor/TrustRD">https://github.com/Anonymous4ScienceAuthor/TrustRD</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRD.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pre_trained_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel" title="faknow.model.social_context.trustrd.TrustRDPreTrainModel"><span class="pre">TrustRDPreTrainModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hid_feature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.02</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRD.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRD.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pre_trained_model</strong> (<a class="reference internal" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel" title="faknow.model.social_context.trustrd.TrustRDPreTrainModel"><em>TrustRDPreTrainModel</em></a>) – the model of trained TrustRDPreTrainModel.</p></li>
+<li><p><strong>in_feature</strong> (<em>int</em>) – the feature size of input. default=192.</p></li>
+<li><p><strong>hid_feature</strong> (<em>int</em>) – the feature size of hidden embedding. default=64.</p></li>
+<li><p><strong>num_classes</strong> (<em>int</em>) – the num of class. default=4.</p></li>
+<li><p><strong>sigma_m</strong> (<em>float</em>) – data perturbation Standard Deviation. default=0.1</p></li>
+<li><p><strong>eta</strong> (<em>float</em>) – data perturbation weight. default=0.4.</p></li>
+<li><p><strong>zeta</strong> (<em>float</em>) – parameter perturbation weight. default=0.02</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRD.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRD.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRD.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>loss = pred_loss + 0.2 * loss_para + 0.2 * loss_data,
+where pred_loss is the cross entropy loss,
+loss_para is the parameter perturbation loss,
+and loss_data is the data perturbation loss.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Batch</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss dict with key ‘total_loss’, ‘pred_loss’, ‘para_loss’, ‘data_loss’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRD.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">embed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRD.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRD.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>embed</strong> (<em>Tensor</em>) – embedding features processed by TrustRDPreTrainModel.</p></li>
+<li><p><strong>data</strong> (<em>Data</em>) – batch data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[predict_result, last_prob, kl_div]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRD.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRD.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRD.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Batch</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>predication probability, shape=(num_graphs, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRD.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRD.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRD.weights_init">
+<span class="sig-name descname"><span class="pre">weights_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRD.weights_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRD.weights_init" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRDPreTrainModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.trustrd.</span></span><span class="sig-name descname"><span class="pre">TrustRDPreTrainModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gcn_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRDPreTrainModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Self-Supervised Pretraining Model for TrustRD</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRDPreTrainModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_gcn_layers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRDPreTrainModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hidden_dim</strong> (<em>int</em>) – the feature size of hidden embedding. default=64.</p></li>
+<li><p><strong>num_gcn_layers</strong> (<em>int</em>) – the gcn pre_trained_model layer num. default=3.</p></li>
+<li><p><strong>num_classes</strong> (<em>int</em>) – the num of class. default=4.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRDPreTrainModel.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRDPreTrainModel.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate ib_loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Batch</em>) – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ib_loss</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRDPreTrainModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Batch</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRDPreTrainModel.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Batch</em>) – pyg data batch</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>positive augment data, negative augment data</dt><dd><p>and average representation</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[Tensor, Tensor, Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRDPreTrainModel.generate_drop_edge">
+<span class="sig-name descname"><span class="pre">generate_drop_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRDPreTrainModel.generate_drop_edge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel.generate_drop_edge" title="Permalink to this definition"></a></dt>
+<dd><p>Generate dropped edge to augment data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRDPreTrainModel.init_emb">
+<span class="sig-name descname"><span class="pre">init_emb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#TrustRDPreTrainModel.init_emb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel.init_emb" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.TrustRDPreTrainModel.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.trustrd.TrustRDPreTrainModel.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.model.social_context.trustrd.calculate_ib_loss">
+<span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.trustrd.</span></span><span class="sig-name descname"><span class="pre">calculate_ib_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g_enc_pos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_enc_neg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_enc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/social_context/trustrd.html#calculate_ib_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.trustrd.calculate_ib_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Compute contrastive loss
+:param g_enc_pos: positive augment data.
+:type g_enc_pos: Tensor
+:param g_enc_neg: negative augment data.
+:type g_enc_neg: Tensor
+:param g_enc: average representation. g_enc = (g_enc_pos + g_enc_neg) / 2.
+:type g_enc: Tensor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ib_loss</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.social_context.upfd">
+<span id="faknow-model-social-context-upfd"></span><h2>faknow.model.social_context.upfd<a class="headerlink" href="#module-faknow.model.social_context.upfd" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGAT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.upfd.</span></span><span class="sig-name descname"><span class="pre">UPFDGAT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDGAT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGAT" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGNN</span></code></p>
+<p>User Preference-aware Fake News Detection, SIGIR 2021
+paper: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3404835.3462990">https://dl.acm.org/doi/abs/10.1145/3404835.3462990</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<p>UPFD model with GAT layer</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGAT.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDGAT.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGAT.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer. Default=128</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGAT.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGAT.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGCN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.upfd.</span></span><span class="sig-name descname"><span class="pre">UPFDGCN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDGCN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGCN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGNN</span></code></p>
+<p>User Preference-aware Fake News Detection, SIGIR 2021
+paper: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3404835.3462990">https://dl.acm.org/doi/abs/10.1145/3404835.3462990</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<p>UPFD model with GCN layer</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGCN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDGCN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGCN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer. Default=128</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGCN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGCN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGCNFN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.upfd.</span></span><span class="sig-name descname"><span class="pre">UPFDGCNFN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDGCNFN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGCNFN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGCNFN</span></code></p>
+<p>User Preference-aware Fake News Detection, SIGIR 2021
+paper: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3404835.3462990">https://dl.acm.org/doi/abs/10.1145/3404835.3462990</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<p>UPFD model with GCNFN layer</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGCNFN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDGCNFN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGCNFN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer. Default=128</p></li>
+<li><p><strong>dropout_ratio</strong> (<em>float</em>) – dropout ratio. Default=0.5</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDGCNFN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDGCNFN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDSAGE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.social_context.upfd.</span></span><span class="sig-name descname"><span class="pre">UPFDSAGE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDSAGE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDSAGE" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_BaseGNN</span></code></p>
+<p>User Preference-aware Fake News Detection, SIGIR 2021
+paper: <a class="reference external" href="https://dl.acm.org/doi/abs/10.1145/3404835.3462990">https://dl.acm.org/doi/abs/10.1145/3404835.3462990</a>
+code: <a class="reference external" href="https://github.com/safe-graph/GNN-FakeNews">https://github.com/safe-graph/GNN-FakeNews</a></p>
+<p>UPFD model with SAGE layer</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDSAGE.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">128</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/social_context/upfd.html#UPFDSAGE.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDSAGE.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feature_size</strong> (<em>int</em>) – dimension of input node feature</p></li>
+<li><p><strong>hidden_size</strong> (<em>int</em>) – dimension of hidden layer. Default=128</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.social_context.upfd.UPFDSAGE.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.social_context.upfd.UPFDSAGE.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="faknow.model.layers.html" class="btn btn-neutral float-left" title="faknow.model.layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faknow.run.html" class="btn btn-neutral float-right" title="faknow.run" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, NPURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

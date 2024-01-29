@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.model.content_based &mdash; FaKnow v1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="faknow.model.content_based.multi_modal" href="faknow.model.content_based.multi_modal.html" />
+    <link rel="prev" title="faknow.model" href="faknow.model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/train_eval_intro.html">Trainer Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_datasets.html">Customize DataSets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_evaluator.html">Customize Evaluator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="faknow.data.html">faknow.data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="faknow.model.html">faknow.model</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">faknow.model.content_based</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html">faknow.model.content_based.multi_modal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.content_based.endef">faknow.model.content_based.endef</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.endef.ENDEF"><code class="docutils literal notranslate"><span class="pre">ENDEF</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.content_based.m3fend">faknow.model.content_based.m3fend</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.m3fend.M3FEND"><code class="docutils literal notranslate"><span class="pre">M3FEND</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.m3fend.MemoryNetwork"><code class="docutils literal notranslate"><span class="pre">MemoryNetwork</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.m3fend.cal_length"><code class="docutils literal notranslate"><span class="pre">cal_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.m3fend.convert_to_onehot"><code class="docutils literal notranslate"><span class="pre">convert_to_onehot()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.m3fend.norm"><code class="docutils literal notranslate"><span class="pre">norm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.content_based.mdfend">faknow.model.content_based.mdfend</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.mdfend.MDFEND"><code class="docutils literal notranslate"><span class="pre">MDFEND</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.model.content_based.textcnn">faknow.model.content_based.textcnn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.model.content_based.textcnn.TextCNN"><code class="docutils literal notranslate"><span class="pre">TextCNN</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.layers.html">faknow.model.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.social_context.html">faknow.model.social_context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.html#module-faknow.model.model">faknow.model.model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="faknow.model.html">faknow.model</a></li>
+      <li class="breadcrumb-item active">faknow.model.content_based</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/faknow/faknow.model.content_based.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="faknow-model-content-based">
+<h1>faknow.model.content_based<a class="headerlink" href="#faknow-model-content-based" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faknow.model.content_based.multi_modal.html">faknow.model.content_based.multi_modal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.cafe">faknow.model.content_based.multi_modal.cafe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.cafe.CAFE"><code class="docutils literal notranslate"><span class="pre">CAFE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.cafe.CAFE.__init__"><code class="docutils literal notranslate"><span class="pre">CAFE.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.cafe.CAFE.calculate_loss"><code class="docutils literal notranslate"><span class="pre">CAFE.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.cafe.CAFE.forward"><code class="docutils literal notranslate"><span class="pre">CAFE.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.cafe.CAFE.predict"><code class="docutils literal notranslate"><span class="pre">CAFE.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.cafe.CAFE.training"><code class="docutils literal notranslate"><span class="pre">CAFE.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.eann">faknow.model.content_based.multi_modal.eann</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.eann.EANN"><code class="docutils literal notranslate"><span class="pre">EANN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.eann.EANN.__init__"><code class="docutils literal notranslate"><span class="pre">EANN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.eann.EANN.calculate_loss"><code class="docutils literal notranslate"><span class="pre">EANN.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.eann.EANN.forward"><code class="docutils literal notranslate"><span class="pre">EANN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.eann.EANN.predict"><code class="docutils literal notranslate"><span class="pre">EANN.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.eann.EANN.training"><code class="docutils literal notranslate"><span class="pre">EANN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.hmcan">faknow.model.content_based.multi_modal.hmcan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN"><code class="docutils literal notranslate"><span class="pre">HMCAN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.__init__"><code class="docutils literal notranslate"><span class="pre">HMCAN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.calculate_loss"><code class="docutils literal notranslate"><span class="pre">HMCAN.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.forward"><code class="docutils literal notranslate"><span class="pre">HMCAN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.predict"><code class="docutils literal notranslate"><span class="pre">HMCAN.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.hmcan.HMCAN.training"><code class="docutils literal notranslate"><span class="pre">HMCAN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.mcan">faknow.model.content_based.multi_modal.mcan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN"><code class="docutils literal notranslate"><span class="pre">MCAN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN.__init__"><code class="docutils literal notranslate"><span class="pre">MCAN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN.calculate_loss"><code class="docutils literal notranslate"><span class="pre">MCAN.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN.drop_bn_layer"><code class="docutils literal notranslate"><span class="pre">MCAN.drop_bn_layer()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN.forward"><code class="docutils literal notranslate"><span class="pre">MCAN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN.predict"><code class="docutils literal notranslate"><span class="pre">MCAN.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mcan.MCAN.training"><code class="docutils literal notranslate"><span class="pre">MCAN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.mfan">faknow.model.content_based.multi_modal.mfan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mfan.MFAN"><code class="docutils literal notranslate"><span class="pre">MFAN</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mfan.MFAN.__init__"><code class="docutils literal notranslate"><span class="pre">MFAN.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mfan.MFAN.calculate_loss"><code class="docutils literal notranslate"><span class="pre">MFAN.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mfan.MFAN.forward"><code class="docutils literal notranslate"><span class="pre">MFAN.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mfan.MFAN.predict"><code class="docutils literal notranslate"><span class="pre">MFAN.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.mfan.MFAN.training"><code class="docutils literal notranslate"><span class="pre">MFAN.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.safe">faknow.model.content_based.multi_modal.safe</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.safe.SAFE"><code class="docutils literal notranslate"><span class="pre">SAFE</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.safe.SAFE.__init__"><code class="docutils literal notranslate"><span class="pre">SAFE.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.safe.SAFE.calculate_loss"><code class="docutils literal notranslate"><span class="pre">SAFE.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.safe.SAFE.forward"><code class="docutils literal notranslate"><span class="pre">SAFE.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.safe.SAFE.predict"><code class="docutils literal notranslate"><span class="pre">SAFE.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.safe.SAFE.training"><code class="docutils literal notranslate"><span class="pre">SAFE.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#module-faknow.model.content_based.multi_modal.spotfake">faknow.model.content_based.multi_modal.spotfake</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.spotfake.SpotFake"><code class="docutils literal notranslate"><span class="pre">SpotFake</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.spotfake.SpotFake.__init__"><code class="docutils literal notranslate"><span class="pre">SpotFake.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.spotfake.SpotFake.calculate_loss"><code class="docutils literal notranslate"><span class="pre">SpotFake.calculate_loss()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.spotfake.SpotFake.forward"><code class="docutils literal notranslate"><span class="pre">SpotFake.forward()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.spotfake.SpotFake.predict"><code class="docutils literal notranslate"><span class="pre">SpotFake.predict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="faknow.model.content_based.multi_modal.html#faknow.model.content_based.multi_modal.spotfake.SpotFake.training"><code class="docutils literal notranslate"><span class="pre">SpotFake.training</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="module-faknow.model.content_based.endef">
+<span id="faknow-model-content-based-endef"></span><h2>faknow.model.content_based.endef<a class="headerlink" href="#module-faknow.model.content_based.endef" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.content_based.endef.ENDEF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.endef.</span></span><span class="sig-name descname"><span class="pre">ENDEF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pre_trained_bert_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><span class="pre">AbstractModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/endef.html#ENDEF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.endef.ENDEF" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Generalizing to the Future: Mitigating Entity Bias in Fake News Detection, SIGIR 2022
+paper: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3477495.3531816">https://dl.acm.org/doi/10.1145/3477495.3531816</a>
+code: <a class="reference external" href="https://github.com/ICTMCG/ENDEF-SIGIR2022">https://github.com/ICTMCG/ENDEF-SIGIR2022</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.endef.ENDEF.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pre_trained_bert_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><span class="pre">AbstractModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/endef.html#ENDEF.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.endef.ENDEF.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pre_trained_bert_name</strong> (<em>str</em>) – the name or local path of pre-trained bert model</p></li>
+<li><p><strong>base_model</strong> (<a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><em>AbstractModel</em></a>) – the base model(content_based) using with entity features</p></li>
+<li><p><strong>mlp_dims</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – a list of the dimensions in MLP layer, if None, [384] will be taken as default</p></li>
+<li><p><strong>dropout_rate</strong> (<em>float</em>) – dropout rate. Default=0.2</p></li>
+<li><p><strong>entity_weight</strong> (<em>float</em>) – the weight of entity in train. Default=0.1</p></li>
+<li><p><strong>loss_weight</strong> (<em>float</em>) – the weight of entity in loss. Default=0.2</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.endef.ENDEF.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/endef.html#ENDEF.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.endef.ENDEF.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss via BCELoss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – batch data dict</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>loss (Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.endef.ENDEF.dict_to_dict">
+<span class="sig-name descname"><span class="pre">dict_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/endef.html#ENDEF.dict_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.endef.ENDEF.dict_to_dict" title="Permalink to this definition"></a></dt>
+<dd><p>change inputs to one layer dict if it’s nesting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>inputs</strong> (<em>Dict</em>) – dict need to be processed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.endef.ENDEF.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_model_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_token_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/endef.html#ENDEF.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.endef.ENDEF.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_model_params</strong> (<em>Dict</em>) – a dictionary including all param base_model.forward() need</p></li>
+<li><p><strong>entity_token_id</strong> (<em>Tensor</em>) – entity’s token ids from bert tokenizer, shape=(batch, max_len)</p></li>
+<li><p><strong>entity_mask</strong> (<em>Tensor</em>) – mask from bert tokenizer, shape=(batch_size, max_len)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>unbiased_prediction(Tensor): considering both biased_predction and entity_prediction, prediction of being fake, shape = (batch_size, ).</p></li>
+<li><p>entity_prediction(Tensor): prediction of entity shape = (batch_size, ).</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.endef.ENDEF.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/endef.html#ENDEF.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.endef.ENDEF.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – batch data dict</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>shape is same as base_model</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.content_based.endef.ENDEF.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.content_based.endef.ENDEF.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.content_based.m3fend">
+<span id="faknow-model-content-based-m3fend"></span><h2>faknow.model.content_based.m3fend<a class="headerlink" href="#module-faknow.model.content_based.m3fend" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.m3fend.</span></span><span class="sig-name descname"><span class="pre">M3FEND</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emb_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotion_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LNN_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>M3FEND: Memory-Guided Multi-View Multi-Domain Fake News Detection
+paper: <a class="reference external" href="https://ieeexplore.ieee.org/document/9802916">https://ieeexplore.ieee.org/document/9802916</a>, TKDE 2022
+code: <a class="reference external" href="https://github.com/ICTMCG/M3FEND">https://github.com/ICTMCG/M3FEND</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">emb_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_dims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotion_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LNN_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>emb_dim</strong> (<em>int</em>) – Dimensionality of the embeddings.</p></li>
+<li><p><strong>mlp_dims</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – List of dimensions for the MLP layers.</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – Dropout probability.</p></li>
+<li><p><strong>semantic_num</strong> (<em>int</em>) – Number of semantic experts.</p></li>
+<li><p><strong>emotion_num</strong> (<em>int</em>) – Number of emotion experts.</p></li>
+<li><p><strong>style_num</strong> (<em>int</em>) – Number of style experts.</p></li>
+<li><p><strong>LNN_dim</strong> (<em>int</em>) – Dimensionality of the Latent Neural Network (LNN).</p></li>
+<li><p><strong>domain_num</strong> (<em>int</em>) – Number of domains.</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Dataset identifier (‘ch’ for Chinese, ‘en’ for English).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the loss for the M3FEND model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_data</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Tensor</em><em>]</em>) – </p></li>
+<li><p><strong>'content'</strong> (<em>Input data containing</em>) – </p></li>
+<li><p><strong>'content_masks'</strong> – </p></li>
+<li><p><strong>'comments'</strong> – </p></li>
+<li><p><strong>'comments_masks'</strong> – </p></li>
+<li><p><strong>'content_emotion'</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p>:param :
+:param ‘comments_emotion’:
+:param ‘emotion_gap’:
+:param ‘style_feature’:
+:param ‘category’:
+:param ‘label’ tensors.:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>loss</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.init_memory">
+<span class="sig-name descname"><span class="pre">init_memory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND.init_memory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.init_memory" title="Permalink to this definition"></a></dt>
+<dd><p>通过 K-Means 聚类，为每个领域创建一个域内存，该域内存包含了该领域内样本特征的聚类中心
+这有助于模型学习领域内的代表性特征，提高模型对不同领域数据的适应能力</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Tensor</em><em>]</em>) – batch data dict</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>softmax probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.save_feature">
+<span class="sig-name descname"><span class="pre">save_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND.save_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.save_feature" title="Permalink to this definition"></a></dt>
+<dd><p>这段代码的作用是将所有样本的归一化特征按照它们的领域（domain）信息保存在self.all_feature 字典中。
+键对应一个领域（domain）的整数，值是一个包含该领域所有样本特征的列表。每个特征都以 NumPy 数组的形式表示。</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.M3FEND.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#M3FEND.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.M3FEND.write" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.MemoryNetwork">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.m3fend.</span></span><span class="sig-name descname"><span class="pre">MemoryNetwork</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emb_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#MemoryNetwork"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.MemoryNetwork" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.MemoryNetwork.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emb_dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#MemoryNetwork.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.MemoryNetwork.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.MemoryNetwork.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#MemoryNetwork.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.MemoryNetwork.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.MemoryNetwork.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.content_based.m3fend.MemoryNetwork.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.MemoryNetwork.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#MemoryNetwork.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.MemoryNetwork.write" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.cal_length">
+<span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.m3fend.</span></span><span class="sig-name descname"><span class="pre">cal_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#cal_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.cal_length" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.convert_to_onehot">
+<span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.m3fend.</span></span><span class="sig-name descname"><span class="pre">convert_to_onehot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#convert_to_onehot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.convert_to_onehot" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.model.content_based.m3fend.norm">
+<span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.m3fend.</span></span><span class="sig-name descname"><span class="pre">norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/m3fend.html#norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.m3fend.norm" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-faknow.model.content_based.mdfend">
+<span id="faknow-model-content-based-mdfend"></span><h2>faknow.model.content_based.mdfend<a class="headerlink" href="#module-faknow.model.content_based.mdfend" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.content_based.mdfend.MDFEND">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.mdfend.</span></span><span class="sig-name descname"><span class="pre">MDFEND</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pre_trained_bert_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expert_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/mdfend.html#MDFEND"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.mdfend.MDFEND" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>MDFEND: Multi-domain Fake News Detection, CIKM 2021
+paper: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3459637.3482139">https://dl.acm.org/doi/10.1145/3459637.3482139</a>
+code: <a class="reference external" href="https://github.com/kennqiang/MDFEND-Weibo21">https://github.com/kennqiang/MDFEND-Weibo21</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.mdfend.MDFEND.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pre_trained_bert_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlp_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expert_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/mdfend.html#MDFEND.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.mdfend.MDFEND.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pre_trained_bert_name</strong> (<em>str</em>) – the name or local path of pre-trained bert model</p></li>
+<li><p><strong>domain_num</strong> (<em>int</em>) – total number of all domains</p></li>
+<li><p><strong>mlp_dims</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – a list of the dimensions in MLP layer, if None, [384] will be taken as default, default=384</p></li>
+<li><p><strong>dropout_rate</strong> (<em>float</em>) – rate of Dropout layer, default=0.2</p></li>
+<li><p><strong>expert_num</strong> (<em>int</em>) – number of experts also called TextCNNLayer, default=5</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.mdfend.MDFEND.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/mdfend.html#MDFEND.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.mdfend.MDFEND.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss via BCELoss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – batch data dict</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>loss (Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.mdfend.MDFEND.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/mdfend.html#MDFEND.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.mdfend.MDFEND.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>token_id</strong> (<em>Tensor</em>) – token ids from bert tokenizer, shape=(batch_size, max_len)</p></li>
+<li><p><strong>mask</strong> (<em>Tensor</em>) – mask from bert tokenizer, shape=(batch_size, max_len)</p></li>
+<li><p><strong>domain</strong> (<em>Tensor</em>) – domain id, shape=(batch_size,)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the prediction of being fake, shape=(batch_size,)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>FloatTensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.mdfend.MDFEND.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/mdfend.html#MDFEND.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.mdfend.MDFEND.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – batch data dict</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>one-hot probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.content_based.mdfend.MDFEND.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.content_based.mdfend.MDFEND.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.model.content_based.textcnn">
+<span id="faknow-model-content-based-textcnn"></span><h2>faknow.model.content_based.textcnn<a class="headerlink" href="#module-faknow.model.content_based.textcnn" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.model.content_based.textcnn.TextCNN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.model.content_based.textcnn.</span></span><span class="sig-name descname"><span class="pre">TextCNN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word_vectors:</span> <span class="pre">~torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_num=100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_sizes:</span> <span class="pre">~typing.List[int]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activate_func:</span> <span class="pre">~typing.Callable</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">relu&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout=0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freeze=False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/textcnn.html#TextCNN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.textcnn.TextCNN" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="faknow.model.html#faknow.model.model.AbstractModel" title="faknow.model.model.AbstractModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractModel</span></code></a></p>
+<p>Convolutional Neural Networks for Sentence Classification, EMNLP 2014
+paper: <a class="reference external" href="https://aclanthology.org/D14-1181/">https://aclanthology.org/D14-1181/</a>
+code: <a class="reference external" href="https://github.com/yoonkim/CNN_sentence">https://github.com/yoonkim/CNN_sentence</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.textcnn.TextCNN.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word_vectors:</span> <span class="pre">~torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_num=100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel_sizes:</span> <span class="pre">~typing.List[int]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activate_func:</span> <span class="pre">~typing.Callable</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">relu&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout=0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freeze=False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/textcnn.html#TextCNN.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.textcnn.TextCNN.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>word_vectors</strong> (<em>torch.Tensor</em>) – weights of word embedding layer, shape=(vocab_size, embedding_size)</p></li>
+<li><p><strong>filter_num</strong> (<em>int</em>) – number of filters in conv layer. Default=100</p></li>
+<li><p><strong>kernel_sizes</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – list of different kernel_num sizes for TextCNNLayer. Default=[3, 4, 5]</p></li>
+<li><p><strong>activate_func</strong> (<em>Callable</em>) – activate function for TextCNNLayer. Default=relu</p></li>
+<li><p><strong>dropout</strong> (<em>float</em>) – drop out rate of fully connected layer. Default=0.5</p></li>
+<li><p><strong>freeze</strong> (<em>bool</em>) – whether to freeze weights in word embedding layer while training. Default=False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.textcnn.TextCNN.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/textcnn.html#TextCNN.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.textcnn.TextCNN.calculate_loss" title="Permalink to this definition"></a></dt>
+<dd><p>calculate loss via CrossEntropyLoss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – batch data tuple</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>loss</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.textcnn.TextCNN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/model/content_based/textcnn.html#TextCNN.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.textcnn.TextCNN.forward" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – batch data, shape=(batch_size, max_len)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>output, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.model.content_based.textcnn.TextCNN.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_without_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/model/content_based/textcnn.html#TextCNN.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.model.content_based.textcnn.TextCNN.predict" title="Permalink to this definition"></a></dt>
+<dd><p>predict the probability of being fake news</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_without_label</strong> – batch data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>softmax probability, shape=(batch_size, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.model.content_based.textcnn.TextCNN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#faknow.model.content_based.textcnn.TextCNN.training" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="faknow.model.html" class="btn btn-neutral float-left" title="faknow.model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faknow.model.content_based.multi_modal.html" class="btn btn-neutral float-right" title="faknow.model.content_based.multi_modal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, NPURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>faknow.data.dataset &mdash; FaKnow v1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="faknow.data.process" href="faknow.data.process.html" />
+    <link rel="prev" title="faknow.data" href="faknow.data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FaKnow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">get started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started/usage_example.html">Usage Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/config_intro.html">Config Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/data_intro.html">Data Module Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/model_intro.html">Model Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/train_eval_intro.html">Trainer Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/usage.html">Usage</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_models.html">Customize Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_trainers.html">Customize Trainers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_datasets.html">Customize DataSets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/customize_evaluator.html">Customize Evaluator</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API REFERENCE:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="faknow.data.html">faknow.data</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">faknow.data.dataset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.algm_dataset">faknow.data.dataset.algm_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.algm_dataset.ALGMDataset"><code class="docutils literal notranslate"><span class="pre">ALGMDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.bigcn_dataset">faknow.data.dataset.bigcn_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.bigcn_dataset.BiGCNDataset"><code class="docutils literal notranslate"><span class="pre">BiGCNDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.cafe_dataset">faknow.data.dataset.cafe_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.cafe_dataset.CafeDataset"><code class="docutils literal notranslate"><span class="pre">CafeDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.dataset">faknow.data.dataset.dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.dataset.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.dudef_dataset">faknow.data.dataset.dudef_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.dudef_dataset.DudefDataset"><code class="docutils literal notranslate"><span class="pre">DudefDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.fang_dataset">faknow.data.dataset.fang_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.FangDataset"><code class="docutils literal notranslate"><span class="pre">FangDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.FangEvaluateDataSet"><code class="docutils literal notranslate"><span class="pre">FangEvaluateDataSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.encode_class_idx_label"><code class="docutils literal notranslate"><span class="pre">encode_class_idx_label()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.is_tag"><code class="docutils literal notranslate"><span class="pre">is_tag()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.load_json"><code class="docutils literal notranslate"><span class="pre">load_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.load_text_as_list"><code class="docutils literal notranslate"><span class="pre">load_text_as_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.read_csv"><code class="docutils literal notranslate"><span class="pre">read_csv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.fang_dataset.row_normalize"><code class="docutils literal notranslate"><span class="pre">row_normalize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.m3fend_dataset">faknow.data.dataset.m3fend_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.m3fend_dataset.M3FENDDataSet"><code class="docutils literal notranslate"><span class="pre">M3FENDDataSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.m3fend_dataset.df_filter"><code class="docutils literal notranslate"><span class="pre">df_filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.m3fend_dataset.read_pkl"><code class="docutils literal notranslate"><span class="pre">read_pkl()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.m3fend_dataset.word2input"><code class="docutils literal notranslate"><span class="pre">word2input()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.multi_modal">faknow.data.dataset.multi_modal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.multi_modal.MultiModalDataset"><code class="docutils literal notranslate"><span class="pre">MultiModalDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.safe_dataset">faknow.data.dataset.safe_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.safe_dataset.SAFENumpyDataset"><code class="docutils literal notranslate"><span class="pre">SAFENumpyDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.spotfake_dataset">faknow.data.dataset.spotfake_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.spotfake_dataset.FakeNewsDataset"><code class="docutils literal notranslate"><span class="pre">FakeNewsDataset</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.spotfake_dataset.text_preprocessing"><code class="docutils literal notranslate"><span class="pre">text_preprocessing()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.text">faknow.data.dataset.text</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.text.TextDataset"><code class="docutils literal notranslate"><span class="pre">TextDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-faknow.data.dataset.trustrd_dataset">faknow.data.dataset.trustrd_dataset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#faknow.data.dataset.trustrd_dataset.TrustRDDataset"><code class="docutils literal notranslate"><span class="pre">TrustRDDataset</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="faknow.data.process.html">faknow.data.process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.evaluate.html">faknow.evaluate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.model.html">faknow.model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.run.html">faknow.run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.train.html">faknow.train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faknow.utils.html">faknow.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FaKnow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="faknow.data.html">faknow.data</a></li>
+      <li class="breadcrumb-item active">faknow.data.dataset</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/faknow/faknow.data.dataset.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="faknow-data-dataset">
+<h1>faknow.data.dataset<a class="headerlink" href="#faknow-data-dataset" title="Permalink to this heading"></a></h1>
+<section id="module-faknow.data.dataset.algm_dataset">
+<span id="faknow-data-dataset-algm-dataset"></span><h2>faknow.data.dataset.algm_dataset<a class="headerlink" href="#module-faknow.data.dataset.algm_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.algm_dataset.ALGMDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.algm_dataset.</span></span><span class="sig-name descname"><span class="pre">ALGMDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/algm_dataset.html#ALGMDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.algm_dataset.ALGMDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.algm_dataset.ALGMDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratio</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/algm_dataset.html#ALGMDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.algm_dataset.ALGMDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.bigcn_dataset">
+<span id="faknow-data-dataset-bigcn-dataset"></span><h2>faknow.data.dataset.bigcn_dataset<a class="headerlink" href="#module-faknow.data.dataset.bigcn_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.bigcn_dataset.BiGCNDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.bigcn_dataset.</span></span><span class="sig-name descname"><span class="pre">BiGCNDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">td_drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bu_drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/bigcn_dataset.html#BiGCNDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.bigcn_dataset.BiGCNDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>Dataset for BiGCN.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.bigcn_dataset.BiGCNDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">td_drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bu_drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/bigcn_dataset.html#BiGCNDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.bigcn_dataset.BiGCNDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes_index</strong> (<em>List</em>) – node index list.</p></li>
+<li><p><strong>tree_dict</strong> (<em>Dict</em>) – dictionary of graph.</p></li>
+<li><p><strong>data_path</strong> (<em>str</em>) – the path of data doc, where each sample is a graph
+with node features,  edge indices, the label and the root
+saved in npz file.</p></li>
+<li><p><strong>lower</strong> (<em>int</em>) – the minimum of graph size. default=2.</p></li>
+<li><p><strong>upper</strong> (<em>int</em>) – the maximum of graph size. default=100000.</p></li>
+<li><p><strong>td_drop_rate</strong> (<em>float</em>) – the dropout rate of TDgraph, default=0.2</p></li>
+<li><p><strong>bu_drop_rate</strong> (<em>float</em>) – the dropout rate of BUgraph, default=0.2</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.cafe_dataset">
+<span id="faknow-data-dataset-cafe-dataset"></span><h2>faknow.data.dataset.cafe_dataset<a class="headerlink" href="#module-faknow.data.dataset.cafe_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.cafe_dataset.CafeDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.cafe_dataset.</span></span><span class="sig-name descname"><span class="pre">CafeDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/cafe_dataset.html#CafeDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.cafe_dataset.CafeDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.cafe_dataset.CafeDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/cafe_dataset.html#CafeDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.cafe_dataset.CafeDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_file</strong> (<em>str</em>) – text file,including text and label</p></li>
+<li><p><strong>i_file</strong> (<em>str</em>) – image file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.dataset">
+<span id="faknow-data-dataset-dataset"></span><h2>faknow.data.dataset.dataset<a class="headerlink" href="#module-faknow.data.dataset.dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.dataset.Dataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><a class="reference internal" href="../_modules/faknow/data/dataset/dataset.html#Dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dataset.Dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dataset.Dataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/faknow/data/dataset/dataset.html#Dataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dataset.Dataset.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.dudef_dataset">
+<span id="faknow-data-dataset-dudef-dataset"></span><h2>faknow.data.dataset.dudef_dataset<a class="headerlink" href="#module-faknow.data.dataset.dudef_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.dudef_dataset.</span></span><span class="sig-name descname"><span class="pre">DudefDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baidu_arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dalianligong_arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boson_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auxiliary_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baidu_arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dalianligong_arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boson_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auxiliary_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize the DudefDataset class.
+:param baidu_arr: Function to calculate emotions using Baidu API.
+:type baidu_arr: Callable
+:param dalianligong_arr: Function to calculate emotions using Dalian Ligong University’s method.
+:type dalianligong_arr: Callable
+:param boson_value: Function to extract boson features
+:type boson_value: Callable
+:param auxiliary_features: Function to extract auxiliary features from the text.
+:type auxiliary_features: Callable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.extract_dual_emotion">
+<span class="sig-name descname"><span class="pre">extract_dual_emotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">piece</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.extract_dual_emotion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.extract_dual_emotion" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>piece</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – Dictionary containing content information</p></li>
+<li><p><strong>comments_num</strong> (<em>int</em>) – Number of comments to consider, default=100</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dual emotion array, shape=(275)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dual_emotion (Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.extract_publisher_emotion">
+<span class="sig-name descname"><span class="pre">extract_publisher_emotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emotions_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.extract_publisher_emotion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.extract_publisher_emotion" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>) – Original content of the publisher.</p></li>
+<li><p><strong>content_words</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of segmented words from the content.</p></li>
+<li><p><strong>emotions_dict</strong> (<em>Dict</em>) – Dictionary mapping emotions to their respective indices, default=None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>publisher emotion features, shape=(55,)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>arr (Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.extract_social_emotion">
+<span class="sig-name descname"><span class="pre">extract_social_emotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_emotions_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_emotions_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tensor</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.extract_social_emotion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.extract_social_emotion" title="Permalink to this definition"></a></dt>
+<dd><p>Extract emotions from social interactions (comments)
+:param comments: List of comments
+:type comments: List[str]
+:param comments_words: List of words in comments
+:type comments_words: List[List[str]]
+:param mean_emotions_dict: Dictionary of mean emotions, comments100_emotions_mean_pooling
+:type mean_emotions_dict: Dict
+:param max_emotions_dict: Dictionary of max emotions, comments100_emotions_max_pooling
+:type max_emotions_dict: Dict</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Mean emotion array, shape=(55)
+max_arr (Tensor): Max emotion array, shape=(55)
+concatenated_arr (Tensor): Concatenated mean_arr and max_arr, shape=(110)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>mean_arr (Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.get_dual_emotion">
+<span class="sig-name descname"><span class="pre">get_dual_emotion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.get_dual_emotion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.get_dual_emotion" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves dual emotion arrays from the dataset.
+:param data_dir: The directory containing the dataset.
+:type data_dir: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.get_label">
+<span class="sig-name descname"><span class="pre">get_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.get_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.get_label" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves label arrays from the dataset and saves them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data_dir</strong> (<em>str</em>) – The directory containing the dataset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.get_labels_arr">
+<span class="sig-name descname"><span class="pre">get_labels_arr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pieces</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.get_labels_arr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.get_labels_arr" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pieces</strong> (<em>List</em>) – List of pieces</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tensor of labels,shape=(len(pieces), 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>labels (Tensor)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.get_semantics">
+<span class="sig-name descname"><span class="pre">get_semantics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_num_words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embeddings_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.get_semantics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.get_semantics" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves semantics arrays from the dataset.
+:param data_dir: The directory containing the dataset.
+:type data_dir: str
+:param max_num_words: The maximum number of words.
+:type max_num_words: int
+:param embeddings_index: The embeddings index.
+:type embeddings_index: Dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.dudef_dataset.DudefDataset.load_dataset">
+<span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/dudef_dataset.html#DudefDataset.load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.dudef_dataset.DudefDataset.load_dataset" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_dir</strong> (<em>str</em>) – Path to the directory containing the dataset</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – num of batch size</p></li>
+<li><p><strong>input_types</strong> (<em>List</em>) – List of input types to be loaded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>train data
+val_loader (DataLoader): val data
+test_loader (DataLoader): test data
+semantics_embedding_matrix (Tensor): embedding matrix,shape=(6000,300)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>train_loader (DataLoader)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.fang_dataset">
+<span id="faknow-data-dataset-fang-dataset"></span><h2>faknow.data.dataset.fang_dataset<a class="headerlink" href="#module-faknow.data.dataset.fang_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">FangDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>construct global graph from tsv, txt and csv</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset.get_news_label_map">
+<span class="sig-name descname"><span class="pre">get_news_label_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">news_info_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset.get_news_label_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset.get_news_label_map" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset.get_train_val_test_labels_nodes">
+<span class="sig-name descname"><span class="pre">get_train_val_test_labels_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">news_label_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset.get_train_val_test_labels_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset.get_train_val_test_labels_nodes" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset.load" title="Permalink to this definition"></a></dt>
+<dd><p>load all doc from root path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset.load_and_update_adj_lists">
+<span class="sig-name descname"><span class="pre">load_and_update_adj_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset.load_and_update_adj_lists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset.load_and_update_adj_lists" title="Permalink to this definition"></a></dt>
+<dd><p>construct adjacent_list from edge information doc</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset.load_stance_map">
+<span class="sig-name descname"><span class="pre">load_stance_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stance_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset.load_stance_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset.load_stance_map" title="Permalink to this definition"></a></dt>
+<dd><p>get stance feature from stance information doc</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangDataset.preprocess_news_classification_data">
+<span class="sig-name descname"><span class="pre">preprocess_news_classification_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">news_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_stances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adj_lists</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stance_lists</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">news_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangDataset.preprocess_news_classification_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangDataset.preprocess_news_classification_data" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes_batch</strong> (<em>set</em>) – the idx list of node to be processed.</p></li>
+<li><p><strong>n_stances</strong> (<em>int</em>) – stance num.</p></li>
+<li><p><strong>adj_lists</strong> (<em>dict</em>) – adjacent information dict for every node.</p></li>
+<li><p><strong>stance_lists</strong> (<em>dict</em>) – stance information dict for every node.</p></li>
+<li><p><strong>news_labels</strong> (<em>dict</em>) – news label dict.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangEvaluateDataSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">FangEvaluateDataSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangEvaluateDataSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangEvaluateDataSet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>DataSet used for validate and test</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.FangEvaluateDataSet.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#FangEvaluateDataSet.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.FangEvaluateDataSet.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.encode_class_idx_label">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">encode_class_idx_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#encode_class_idx_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.encode_class_idx_label" title="Permalink to this definition"></a></dt>
+<dd><p>encode label to one_hot embedding</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.is_tag">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">is_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#is_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.is_tag" title="Permalink to this definition"></a></dt>
+<dd><p>find whether the entity is tagged.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.load_json">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">load_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#load_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.load_json" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.load_text_as_list">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">load_text_as_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#load_text_as_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.load_text_as_list" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.read_csv">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">read_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#read_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.read_csv" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.fang_dataset.row_normalize">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.fang_dataset.</span></span><span class="sig-name descname"><span class="pre">row_normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mtx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/fang_dataset.html#row_normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.fang_dataset.row_normalize" title="Permalink to this definition"></a></dt>
+<dd><p>Row-normalize sparse matrix</p>
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.m3fend_dataset">
+<span id="faknow-data-dataset-m3fend-dataset"></span><h2>faknow.data.dataset.m3fend_dataset<a class="headerlink" href="#module-faknow.data.dataset.m3fend_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.m3fend_dataset.M3FENDDataSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.m3fend_dataset.</span></span><span class="sig-name descname"><span class="pre">M3FENDDataSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/m3fend_dataset.html#M3FENDDataSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.m3fend_dataset.M3FENDDataSet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.m3fend_dataset.M3FENDDataSet.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/m3fend_dataset.html#M3FENDDataSet.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.m3fend_dataset.M3FENDDataSet.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.m3fend_dataset.df_filter">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.m3fend_dataset.</span></span><span class="sig-name descname"><span class="pre">df_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/m3fend_dataset.html#df_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.m3fend_dataset.df_filter" title="Permalink to this definition"></a></dt>
+<dd><p>用于根据给定的 category_dict 字典对输入的 DataFrame 进行过滤
+返回过滤后的 DataFrame，其中只包含了在 category_dict 中定义的类别的数据点。</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_data</strong> (<em>pd.DataFrame</em>) – Input DataFrame.</p></li>
+<li><p><strong>category_dict</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – Dictionary mapping category names to integers.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered DataFrame containing only the data points with categories defined in category_dict.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.m3fend_dataset.read_pkl">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.m3fend_dataset.</span></span><span class="sig-name descname"><span class="pre">read_pkl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/m3fend_dataset.html#read_pkl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.m3fend_dataset.read_pkl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.m3fend_dataset.word2input">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.m3fend_dataset.</span></span><span class="sig-name descname"><span class="pre">word2input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">texts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/m3fend_dataset.html#word2input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.m3fend_dataset.word2input" title="Permalink to this definition"></a></dt>
+<dd><p>Tokenize input texts using BERT or RoBERTa tokenizer based on the dataset.
+Return tokenized input IDs and masks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>texts</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of input texts.</p></li>
+<li><p><strong>max_len</strong> (<em>int</em>) – Maximum sequence length.</p></li>
+<li><p><strong>dataset</strong> (<em>str</em>) – Dataset identifier (‘ch’ for Chinese, ‘en’ for English).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tokenized input IDs and masks.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[torch.Tensor, torch.Tensor]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.multi_modal">
+<span id="faknow-data-dataset-multi-modal"></span><h2>faknow.data.dataset.multi_modal<a class="headerlink" href="#module-faknow.data.dataset.multi_modal" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.multi_modal.</span></span><span class="sig-name descname"><span class="pre">MultiModalDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/multi_modal.html#MultiModalDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#faknow.data.dataset.text.TextDataset" title="faknow.data.dataset.text.TextDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextDataset</span></code></a></p>
+<p>Dataset for json file with post texts and images,
+allow users to tokenize texts and convert them into tensors,
+inherit from TextDataset.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.root">
+<span class="sig-name descname"><span class="pre">root</span></span><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.root" title="Permalink to this definition"></a></dt>
+<dd><p>absolute path to json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.data" title="Permalink to this definition"></a></dt>
+<dd><p>data in json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.feature_names">
+<span class="sig-name descname"><span class="pre">feature_names</span></span><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.feature_names" title="Permalink to this definition"></a></dt>
+<dd><p>names of all features in json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.tokenize" title="Permalink to this definition"></a></dt>
+<dd><p>function to tokenize text,
+which takes a list of texts and
+returns a tensor or a dict of tensors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[List[str]], Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.text_features">
+<span class="sig-name descname"><span class="pre">text_features</span></span><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.text_features" title="Permalink to this definition"></a></dt>
+<dd><p>a dict of text features, key is feature name,
+value is feature values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.image_features">
+<span class="sig-name descname"><span class="pre">image_features</span></span><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.image_features" title="Permalink to this definition"></a></dt>
+<dd><p>a list of image features</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.transform" title="Permalink to this definition"></a></dt>
+<dd><p>function to transform image,
+which takes a path to image and
+returns a tensor or a dict of tensors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[str], Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/multi_modal.html#MultiModalDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – absolute path to json file</p></li>
+<li><p><strong>text_features</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – a list of names of text features in json file</p></li>
+<li><p><strong>tokenize</strong> (<em>Callable</em><em>[</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – function to tokenize text,
+which takes a list of texts and
+returns a tensor or a dict of tensors</p></li>
+<li><p><strong>image_features</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – a list of names of image features in json file</p></li>
+<li><p><strong>transform</strong> (<em>Callable</em><em>[</em><em>[</em><em>str</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – function to transform image,
+which takes a path to image and
+returns a tensor or a dict of tensors</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.process_image">
+<span class="sig-name descname"><span class="pre">process_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/multi_modal.html#MultiModalDataset.process_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.process_image" title="Permalink to this definition"></a></dt>
+<dd><p>Mark a feature as image features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of feature to mark as image features</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if there is no feature named ‘name’</p></li>
+<li><p><strong>ValueError</strong> – if feature has already been marked as image features</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.multi_modal.MultiModalDataset.remove_image">
+<span class="sig-name descname"><span class="pre">remove_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/multi_modal.html#MultiModalDataset.remove_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.multi_modal.MultiModalDataset.remove_image" title="Permalink to this definition"></a></dt>
+<dd><p>Remove a feature from image features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of feature to remove from image features</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if there is no feature named ‘name’</p></li>
+<li><p><strong>ValueError</strong> – if feature has not been marked as image features</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.safe_dataset">
+<span id="faknow-data-dataset-safe-dataset"></span><h2>faknow.data.dataset.safe_dataset<a class="headerlink" href="#module-faknow.data.dataset.safe_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.safe_dataset.SAFENumpyDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.safe_dataset.</span></span><span class="sig-name descname"><span class="pre">SAFENumpyDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/safe_dataset.html#SAFENumpyDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.safe_dataset.SAFENumpyDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.safe_dataset.SAFENumpyDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/safe_dataset.html#SAFENumpyDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.safe_dataset.SAFENumpyDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.spotfake_dataset">
+<span id="faknow-data-dataset-spotfake-dataset"></span><h2>faknow.data.dataset.spotfake_dataset<a class="headerlink" href="#module-faknow.data.dataset.spotfake_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.spotfake_dataset.FakeNewsDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.spotfake_dataset.</span></span><span class="sig-name descname"><span class="pre">FakeNewsDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_LEN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/spotfake_dataset.html#FakeNewsDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.spotfake_dataset.FakeNewsDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.spotfake_dataset.FakeNewsDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MAX_LEN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/spotfake_dataset.html#FakeNewsDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.spotfake_dataset.FakeNewsDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>参数:</dt><dd><p>csv_file (string):包含文本和图像名称的csv文件的路径
+root_dir (string):目录
+transform(可选):图像变换</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.spotfake_dataset.FakeNewsDataset.pre_processing_BERT">
+<span class="sig-name descname"><span class="pre">pre_processing_BERT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/spotfake_dataset.html#FakeNewsDataset.pre_processing_BERT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.spotfake_dataset.FakeNewsDataset.pre_processing_BERT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="faknow.data.dataset.spotfake_dataset.text_preprocessing">
+<span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.spotfake_dataset.</span></span><span class="sig-name descname"><span class="pre">text_preprocessing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/spotfake_dataset.html#text_preprocessing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.spotfake_dataset.text_preprocessing" title="Permalink to this definition"></a></dt>
+<dd><ul class="simple">
+<li><p>删除实体&#64;符号(如。“&#64;united”)</p></li>
+</ul>
+<p>— 纠正错误(如:’&amp;amp;’ ‘&amp;’)
+&#64;参数 text (str):要处理的字符串
+&#64;返回 text (Str):已处理的字符串</p>
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.text">
+<span id="faknow-data-dataset-text"></span><h2>faknow.data.dataset.text<a class="headerlink" href="#module-faknow.data.dataset.text" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.text.</span></span><span class="sig-name descname"><span class="pre">TextDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_tensor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/text.html#TextDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.text.TextDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>Dataset for json file with post texts,
+allow users to tokenize texts and convert them into tensors.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.root">
+<span class="sig-name descname"><span class="pre">root</span></span><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.root" title="Permalink to this definition"></a></dt>
+<dd><p>absolute path to json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.data" title="Permalink to this definition"></a></dt>
+<dd><p>data in json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.feature_names">
+<span class="sig-name descname"><span class="pre">feature_names</span></span><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.feature_names" title="Permalink to this definition"></a></dt>
+<dd><p>names of all features in json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.tokenize" title="Permalink to this definition"></a></dt>
+<dd><p>function to tokenize text,
+which takes a list of texts and returns a tensor or a dict of tensors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[List[str]], Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.text_features">
+<span class="sig-name descname"><span class="pre">text_features</span></span><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.text_features" title="Permalink to this definition"></a></dt>
+<dd><p>a dict of text features, key is feature name,
+value is feature values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_tensor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/text.html#TextDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – absolute path to json file</p></li>
+<li><p><strong>text_features</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – a list of names of text features in json file</p></li>
+<li><p><strong>tokenize</strong> (<em>Callable</em><em>[</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – function to tokenize text,
+which takes a list of texts and returns a tensor or a dict of tensors</p></li>
+<li><p><strong>to_tensor</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to convert all features into tensor. Default=True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.check_feature">
+<span class="sig-name descname"><span class="pre">check_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/text.html#TextDataset.check_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.check_feature" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of feature to check</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if there is no feature named ‘name’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.process_text">
+<span class="sig-name descname"><span class="pre">process_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/text.html#TextDataset.process_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.process_text" title="Permalink to this definition"></a></dt>
+<dd><p>process text feature with tokenize function,
+store the old value of the feature in text_features,
+and store the new value in data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of text feature to process</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.text.TextDataset.remove_text">
+<span class="sig-name descname"><span class="pre">remove_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/text.html#TextDataset.remove_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.text.TextDataset.remove_text" title="Permalink to this definition"></a></dt>
+<dd><p>remove text feature from self.text_features</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of text feature to remove</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – if there is no feature named ‘name’</p></li>
+<li><p><strong>ValueError</strong> – if ‘name’ has not been marked as text features</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-faknow.data.dataset.trustrd_dataset">
+<span id="faknow-data-dataset-trustrd-dataset"></span><h2>faknow.data.dataset.trustrd_dataset<a class="headerlink" href="#module-faknow.data.dataset.trustrd_dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="faknow.data.dataset.trustrd_dataset.TrustRDDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">faknow.data.dataset.trustrd_dataset.</span></span><span class="sig-name descname"><span class="pre">TrustRDDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/trustrd_dataset.html#TrustRDDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.trustrd_dataset.TrustRDDataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+<p>Dataset for TrustRD</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="faknow.data.dataset.trustrd_dataset.TrustRDDataset.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/faknow/data/dataset/trustrd_dataset.html#TrustRDDataset.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#faknow.data.dataset.trustrd_dataset.TrustRDDataset.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nodes_index</strong> (<em>List</em>) – node index list.</p></li>
+<li><p><strong>tree_dict</strong> (<em>Dict</em>) – dictionary of graph.</p></li>
+<li><p><strong>data_path</strong> (<em>str</em>) – the path of data doc, where each sample is a graph
+with node features,  edge indices, the label and the root
+saved in npz file.</p></li>
+<li><p><strong>lower</strong> (<em>int</em>) – the minimum of graph size. default=2.</p></li>
+<li><p><strong>upper</strong> (<em>int</em>) – the maximum of graph size. default=100000.</p></li>
+<li><p><strong>drop_rate</strong> (<em>float</em>) – the dropout rate of edge. default=0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="faknow.data.html" class="btn btn-neutral float-left" title="faknow.data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faknow.data.process.html" class="btn btn-neutral float-right" title="faknow.data.process" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, NPURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
